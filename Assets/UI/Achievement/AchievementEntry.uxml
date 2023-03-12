@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Achievement/AchievementEntry.uss?fileID=7433441132597879392&amp;guid=e4d38e8bba694054996a182877cb121e&amp;type=3#AchievementEntry" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Graphics/GUI/Background.png?fileID=2800000&amp;guid=2162e630600374a4a8bb6c8e3a1c597f&amp;type=3#Background&apos;);">
+        <ui:GroupBox name="AcheievementUnlocked" class="unlocked" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-direction: row; align-items: stretch; -unity-font-definition: url(&apos;project://database/Assets/Graphics/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&amp;guid=2fc062e308e3b914cbdf2e8e954886c4&amp;type=3#RD CHULAJARUEK&apos;); color: rgb(229, 229, 229);">
+            <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/worldico_frame1.png?fileID=2800000&amp;guid=941947d0bf6ae314aa6fda294a6fb8c1&amp;type=3#worldico_frame1&apos;); width: 64px; height: 64px; margin-right: 10px; -unity-background-image-tint-color: rgb(141, 127, 56);">
+                <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=121132263&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-large&apos;); width: 48px; height: 48px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: center; align-items: center; justify-content: center; margin-top: auto; margin-bottom: auto; -unity-slice-left: 3; -unity-slice-top: 3; -unity-slice-right: 3; -unity-slice-bottom: 3;" />
+            </ui:VisualElement>
+            <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Achievement Name" display-tooltip-when-elided="true" name="acheievementNameLabel" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-right: 0; padding-left: 0; border-bottom-width: 1px; -unity-font-style: bold; padding-top: 0; padding-bottom: 0;" />
+                <ui:Label tabindex="-1" text="Achievement Description" display-tooltip-when-elided="true" name="acheievementDescriptionLabel" class="label" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+            </ui:GroupBox>
+            <ui:GroupBox>
+                <ui:Label tabindex="-1" text="Unlocked on %s" display-tooltip-when-elided="true" name="acheievementUnlockedAtLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="AcheievementLocked" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; align-items: stretch; -unity-font-definition: url(&apos;project://database/Assets/Graphics/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&amp;guid=2fc062e308e3b914cbdf2e8e954886c4&amp;type=3#RD CHULAJARUEK&apos;); color: rgb(229, 229, 229);">
+            <ui:GroupBox style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-grow: 1;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                    <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/worldico_frame1.png?fileID=2800000&amp;guid=941947d0bf6ae314aa6fda294a6fb8c1&amp;type=3#worldico_frame1&apos;); width: 64px; height: 64px; margin-right: 10px; -unity-background-image-tint-color: rgb(141, 127, 56);">
+                        <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=121132263&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-large&apos;); width: 48px; height: 48px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: center; align-items: center; justify-content: center; margin-top: auto; margin-bottom: auto; -unity-slice-left: 3; -unity-slice-top: 3; -unity-slice-right: 3; -unity-slice-bottom: 3;" />
+                    </ui:VisualElement>
+                    <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-grow: 1;">
+                        <ui:Label tabindex="-1" text="Achievement Name" display-tooltip-when-elided="true" name="acheievementNameLabel" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-right: 0; padding-left: 0; border-bottom-width: 1px; -unity-font-style: bold; padding-top: 0; padding-bottom: 0;" />
+                        <ui:Label tabindex="-1" text="???" display-tooltip-when-elided="true" name="acheievementDescriptionLabel" class="label" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                    </ui:GroupBox>
+                    <ui:GroupBox>
+                        <ui:Label tabindex="-1" text="Not Unlocked Yet" display-tooltip-when-elided="true" name="acheievementUnlockedAtLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                    </ui:GroupBox>
+                </ui:VisualElement>
+            </ui:GroupBox>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.45); position: absolute; width: 100%; flex-shrink: 0; flex-basis: auto; flex-direction: column-reverse; height: 100%; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

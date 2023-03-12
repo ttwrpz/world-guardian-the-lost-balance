@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Singleplayer/WorldListEntry.uss?fileID=7433441132597879392&amp;guid=517b1e0a7c69eb647ae12d4c054dcc96&amp;type=3#WorldListEntry" />
+    <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-direction: row; align-items: stretch; -unity-font-definition: url(&apos;project://database/Assets/Graphics/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&amp;guid=2fc062e308e3b914cbdf2e8e954886c4&amp;type=3#RD CHULAJARUEK&apos;); color: rgb(229, 229, 229);">
+        <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/worldico_frame1.png?fileID=2800000&amp;guid=941947d0bf6ae314aa6fda294a6fb8c1&amp;type=3#worldico_frame1&apos;); width: 64px; height: 64px; margin-right: 10px; -unity-background-image-tint-color: rgb(141, 127, 56);">
+            <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=121132263&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-large&apos;); width: 48px; height: 48px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: center; align-items: center; justify-content: center; margin-top: auto; margin-bottom: auto; -unity-slice-left: 3; -unity-slice-top: 3; -unity-slice-right: 3; -unity-slice-bottom: 3;" />
+        </ui:VisualElement>
+        <ui:GroupBox name="GroupBox" style="flex-grow: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+            <ui:Label tabindex="-1" text="World Name" display-tooltip-when-elided="true" name="worldNameLabel" style="margin-left: 2px; margin-right: 2px; margin-top: 0; margin-bottom: 0; padding-right: 0; padding-left: 0; border-bottom-width: 1px; -unity-font-style: bold; padding-top: 5px; padding-bottom: 0;" />
+            <ui:GroupBox name="LabelWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; flex-direction: row;">
+                <ui:Label tabindex="-1" text="World Folder" display-tooltip-when-elided="true" name="worldFolderLabel" class="label" />
+                <ui:Label tabindex="-1" text="World Gamemode" display-tooltip-when-elided="true" name="worldGameModeLabel" class="label" />
+                <ui:Label tabindex="-1" text="World Difficulty" display-tooltip-when-elided="true" name="worldDifficultyLabel" class="label" />
+                <ui:Label tabindex="-1" text="World Size" display-tooltip-when-elided="true" name="worldSizeLabel" class="label" />
+                <ui:Label tabindex="-1" text="Created at: " display-tooltip-when-elided="true" name="worldCreatedAtLabel" class="label" style="display: none;" />
+                <ui:Label tabindex="-1" text="Last Played: " display-tooltip-when-elided="true" name="worldModifiedAtLabel" class="label" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

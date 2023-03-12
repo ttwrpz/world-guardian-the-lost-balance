@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <ui:VisualElement name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Achievement" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label text="You have Unlocked &quot;%s&quot; of &quot;%s&quot;" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+                <ui:ProgressBar value="0" title="Unlocked All Achievement" />
+            </ui:GroupBox>
+            <ui:ListView />
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="backButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

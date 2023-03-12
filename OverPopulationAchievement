@@ -1,0 +1,7 @@
+
+using UnityEngine;
+
+public class OverPopulationAchievement : NumericAchievement
+{
+    // Implement the methods and properties of the NumericAchievement class here
+}

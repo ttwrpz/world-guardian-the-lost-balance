@@ -1,0 +1,51 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <Style src="project://database/Assets/UI/Singleplayer/GUI.uss?fileID=7433441132597879392&amp;guid=738b56114a04f9f41a16ebfd8c108e54&amp;type=3#GUI" />
+    <ui:VisualElement name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Singleplayer" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label text="Create New World" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+            </ui:GroupBox>
+            <ui:ScrollView name="CreateWorldWrapper" style="flex-grow: 1; display: none;" />
+            <ui:ScrollView>
+                <ui:GroupBox name="GroupBox" style="flex-grow: 1; flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
+                    <ui:GroupBox name="TextFieldWithIcon" class="text-field-with-icon-wrapper">
+                        <ui:VisualElement name="TextFieldIcon" class="field-icon-wrapper">
+                            <ui:VisualElement name="WorldNameIcon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=-174676438&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world_name&apos;);" />
+                        </ui:VisualElement>
+                        <ui:TextField picking-mode="Ignore" label="World Name:" value="New World" name="worldNameInput" max-length="50" class="text-field-with-icon" />
+                    </ui:GroupBox>
+                    <ui:GroupBox name="TextFieldWithIcon" class="text-field-with-icon-wrapper" style="flex-direction: row; -unity-text-align: middle-left;">
+                        <ui:VisualElement name="TextFieldIcon" class="field-icon-wrapper">
+                            <ui:VisualElement name="WorldSeedIcon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=-1615468867&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world_seed&apos;);" />
+                        </ui:VisualElement>
+                        <ui:TextField picking-mode="Ignore" label="World Seed:" name="worldSeedInput" class="text-field-with-icon" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-grow: 1;" />
+                    </ui:GroupBox>
+                    <ui:GroupBox name="RadioButtonGroupWithIcon" class="radio-button-group-with-icon-wrapper">
+                        <ui:VisualElement name="RadioButtonGroup" class="field-icon-wrapper">
+                            <ui:VisualElement name="WorldGameModeIcon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=84900697&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-gamemode-story&apos;);" />
+                        </ui:VisualElement>
+                        <ui:RadioButtonGroup label="Gamemode:" choices="Story,Sandbox" name="worldGameModeRadioInput" value="0" class="radioButtonGroupRow radio-button-group-with-icon" style="flex-direction: row; -unity-font-style: normal;" />
+                    </ui:GroupBox>
+                    <ui:GroupBox name="RadioButtonGroupWithIcon" class="radio-button-group-with-icon-wrapper">
+                        <ui:VisualElement name="RadioButtonGroup" class="field-icon-wrapper">
+                            <ui:VisualElement name="WorldDifficultyIcon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=248186876&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-difficulty-easy&apos;);" />
+                        </ui:VisualElement>
+                        <ui:RadioButtonGroup label="Difficulty:" choices="Easy,Medium,Hard" name="worldDifficultyRadioInput" value="0" class="radioButtonGroupRow radio-button-group-with-icon" style="flex-direction: row;" />
+                    </ui:GroupBox>
+                    <ui:GroupBox name="RadioButtonGroupWithIcon" class="radio-button-group-with-icon-wrapper">
+                        <ui:VisualElement name="RadioButtonGroup" class="field-icon-wrapper">
+                            <ui:VisualElement name="WorldSizeIcon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=-1445824326&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-medium&apos;);" />
+                        </ui:VisualElement>
+                        <ui:RadioButtonGroup label="World Size:" choices="Small,Medium,Large" name="worldSizeRadioInput" value="1" class="radioButtonGroupRow radio-button-group-with-icon" style="flex-direction: row;" />
+                    </ui:GroupBox>
+                </ui:GroupBox>
+            </ui:ScrollView>
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="padding-right: 3px;">
+                <ui:Button text="Create New World" display-tooltip-when-elided="true" name="createWorldButton" class="btn btn-lg" />
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="backButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

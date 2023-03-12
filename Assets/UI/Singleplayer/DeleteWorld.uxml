@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <Style src="project://database/Assets/UI/Singleplayer/GUI.uss?fileID=7433441132597879392&amp;guid=738b56114a04f9f41a16ebfd8c108e54&amp;type=3#GUI" />
+    <ui:VisualElement name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Singleplayer" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label text="Delete World &quot;%s&quot;" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+            </ui:GroupBox>
+            <ui:Label tabindex="-1" text="Are you sure you want to delete this world?\n&apos;%s&apos; will be lost forever!" display-tooltip-when-elided="true" name="deleteLabel" parse-escape-sequences="true" style="-unity-text-align: middle-center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229); font-size: 20px; -unity-font-style: bold;" />
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="padding-right: 3px; align-items: center;">
+                <ui:Button text="Delete" name="deleteButton" class="btn btn-lg" />
+                <ui:Button text="Back" name="backButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

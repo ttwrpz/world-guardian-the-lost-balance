@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <ui:VisualElement name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Singleplayer" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label text="Select World" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+            </ui:GroupBox>
+            <ui:VisualElement name="WorldWrapper" class="UIWrapper" style="margin-top: 5px; margin-bottom: 5px; flex-grow: 1;">
+                <ui:ListView focusable="true" name="WorldListEntry" show-add-remove-footer="false" reorderable="false" virtualization-method="DynamicHeight" show-foldout-header="false" style="height: 100%;" />
+            </ui:VisualElement>
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="flex-direction: column;">
+                <ui:GroupBox name="GroupBox" class="btn-row" style="flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 100%;">
+                    <ui:Button text="Play" display-tooltip-when-elided="true" name="playWorldButton" class="btn btn-disabled" />
+                    <ui:Button text="Edit" display-tooltip-when-elided="true" name="editWorldButton" class="btn btn-disabled" />
+                    <ui:Button text="Delete" display-tooltip-when-elided="true" name="deleteWorldButton" class="btn btn-disabled" />
+                </ui:GroupBox>
+                <ui:GroupBox name="GroupBox" class="btn-row" style="flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 100%;">
+                    <ui:Button text="Create New World" display-tooltip-when-elided="true" name="createWorldButton" class="btn btn-lg" />
+                    <ui:Button text="Back" display-tooltip-when-elided="true" name="backButton" class="btn btn-lg" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

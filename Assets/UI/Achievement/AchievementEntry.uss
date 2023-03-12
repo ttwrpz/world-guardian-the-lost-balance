@@ -1,0 +1,6 @@
+.locked > * {
+    color: rgb(103, 103, 103);
+}
+
+.unlocked > * {
+}
