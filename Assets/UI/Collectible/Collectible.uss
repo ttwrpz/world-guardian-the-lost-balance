@@ -1,0 +1,52 @@
+.btn-label {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: absolute;
+    bottom: 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    -unity-font-style: bold;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    -unity-text-align: upper-left;
+}
+
+.btn-visual {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 200px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: rgb(229, 229, 229);
+    background-size: contain;
+    background-position: center;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.btn-visual-sidebar {
+    flex-direction: column;
+}
+
+.btn-visual-sidebar > .btn-visual {
+    height: 80px;
+    width: 160px;
+}
+
+.btn-visual-sidebar > .btn-visual .btn-label {
+    font-size: 12px;
+}

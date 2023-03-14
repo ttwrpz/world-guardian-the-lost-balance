@@ -11,7 +11,7 @@
             </ui:VisualElement>
             <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="flex-direction: column;">
                 <ui:GroupBox name="GroupBox" class="btn-row" style="flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 100%;">
-                    <ui:Button text="Play" display-tooltip-when-elided="true" name="playWorldButton" class="btn btn-disabled" />
+                    <ui:Button text="Play Selected" display-tooltip-when-elided="true" name="playWorldButton" class="btn btn-disabled" />
                     <ui:Button text="Edit" display-tooltip-when-elided="true" name="editWorldButton" class="btn btn-disabled" />
                     <ui:Button text="Delete" display-tooltip-when-elided="true" name="deleteWorldButton" class="btn btn-disabled" />
                 </ui:GroupBox>

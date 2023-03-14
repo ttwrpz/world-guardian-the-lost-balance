@@ -1,0 +1,20 @@
+.CollectibleUnlocked > VisualElement {
+    display: none;
+    visibility: hidden;
+}
+
+.CollectibleLocked > VisualElement {
+    flex-grow: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    width: 100%;
+    flex-shrink: 0;
+    flex-basis: auto;
+    flex-direction: column-reverse;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+}

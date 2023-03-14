@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -16,6 +17,12 @@ public class DeleteWorldUIController : MonoBehaviour
 
     private void OnEnable()
     {
+        GetUIElements();
+        AttachEventHandlers();
+    }
+
+    private void GetUIElements()
+    {
         _doc = GetComponent<UIDocument>();
         _root = _doc.rootVisualElement;
 
@@ -26,25 +33,28 @@ public class DeleteWorldUIController : MonoBehaviour
         _deleteLabel.text = _deleteLabel.text.Replace("%s", worldData.WorldName);
 
         _deleteButton = _root.Q<Button>("deleteButton");
-        _deleteButton.clicked += onDeleteWorldButtonClicked;
-
         _backButton = _root.Q<Button>("backButton");
+    }
+
+    private void AttachEventHandlers()
+    {
+        _deleteButton.clicked += onDeleteWorldButtonClicked;
         _backButton.clicked += onBackButtonClicked;
     }
 
-    private void onDeleteWorldButtonClicked()
+    private async void onDeleteWorldButtonClicked()
     {
         World world = new()
         {
-            worldName = worldData.WorldName,
-            worldFolder = worldData.WorldFolder
+            WorldName = worldData.WorldName,
+            WorldFolder = worldData.WorldFolder
         };
         SaveManager.DeleteWorld(world);
-        SceneManager.LoadScene("Assets/Scenes/Singleplayer/Singleplayer.unity");
+        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
-    private void onBackButtonClicked()
+    private async void onBackButtonClicked()
     {
-        SceneManager.LoadScene("Assets/Scenes/Singleplayer/Singleplayer.unity");
+        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 }

@@ -5,12 +5,11 @@ public class WorldData : ScriptableObject
 {
     public void Initialize(World world)
     {
-        WorldName = world.worldName;
-        WorldSeed = world.worldSeed;
-        WorldGameMode = world.worldGameMode;
-        WorldDifficulty = world.worldDifficulty;
-        WorldSize = world.worldSize;
-        WorldFolder = world.worldFolder;
+        WorldName = world.WorldName;
+        WorldSeed = world.WorldSeed;
+        WorldGameMode = world.WorldGameMode;
+        WorldDifficulty = world.WorldDifficulty;
+        WorldFolder = world.WorldFolder;
     }
 
     public void ClearData()
@@ -19,7 +18,6 @@ public class WorldData : ScriptableObject
         WorldSeed = "";
         WorldGameMode = 0;
         WorldDifficulty = 0;
-        WorldSize = 0;
         WorldFolder = "";
     }
 
@@ -42,30 +40,21 @@ public class WorldData : ScriptableObject
     }
 
     [SerializeField]
-    private World.WorldGameMode _worldGameMode;
+    private World.GameMode _worldGameMode;
 
-    public World.WorldGameMode WorldGameMode
+    public World.GameMode WorldGameMode
     {
         get { return _worldGameMode; }
         set { _worldGameMode = value; }
     }
 
     [SerializeField]
-    private World.WorldDifficulty _worldDifficulty;
+    private World.Difficulty _worldDifficulty;
 
-    public World.WorldDifficulty WorldDifficulty
+    public World.Difficulty WorldDifficulty
     {
         get { return _worldDifficulty; }
         set { _worldDifficulty = value; }
-    }
-
-    [SerializeField]
-    private World.WorldSize _worldSize;
-
-    public World.WorldSize WorldSize
-    {
-        get { return _worldSize; }
-        set { _worldSize = value; }
     }
 
     [SerializeField]

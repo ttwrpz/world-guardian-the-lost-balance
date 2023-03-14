@@ -30,12 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer/WaitingLobby.unity
     guid: 7ea243b7e1f3e2b4386c693dfda3d55b
   - enabled: 1
-    path: Assets/Scenes/Multiplayer/AddServer.unity
-    guid: a34f50be13a72bf43994dc6827f572ba
-  - enabled: 1
-    path: Assets/Scenes/Multiplayer/DeleteServer.unity
-    guid: 7f4a16f5886463c48b5e24815e8de867
-  - enabled: 1
     path: Assets/Scenes/Achievement/Achievement.unity
     guid: baf8f48a7bf082c46975e87e2b0e7b16
   - enabled: 1
@@ -51,16 +45,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Collectible/Landmark.unity
     guid: 42f531d1ef11da0419ee076d0fc744c9
   - enabled: 1
-    path: Assets/Scenes/Collectible/ScreenShot.unity
+    path: Assets/Scenes/Collectible/Lore.unity
     guid: ab6a1d06509294846a0723a2438276a1
-  - enabled: 1
-    path: Assets/Scenes/Main/Credit.unity
-    guid: afdca716cebd0ee4496c01a3c3b1fa30
-  - enabled: 1
-    path: Assets/Scenes/Main/HowTo.unity
-    guid: 8c834005536b7aa43a6c023ea2baa210
-  - enabled: 1
-    path: Assets/Scenes/Main/License.unity
-    guid: 671a83937787eec458379eeb2165727b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

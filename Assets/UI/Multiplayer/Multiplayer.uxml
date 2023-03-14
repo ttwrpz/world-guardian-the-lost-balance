@@ -1,9 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <Style src="project://database/Assets/UI/Multiplayer/GUI.uss?fileID=7433441132597879392&amp;guid=6a5b807b753c5db42866cade13fd8cca&amp;type=3#GUI" />
+    <ui:VisualElement name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Multiplayer" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label text="Direct Connection" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+            </ui:GroupBox>
+            <ui:GroupBox name="GroupBox" style="flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
+                <ui:GroupBox name="TextFieldWithIcon" class="text-field-with-icon-wrapper">
+                    <ui:VisualElement name="TextFieldIcon" class="field-icon-wrapper">
+                        <ui:VisualElement name="Icon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=121132263&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-large&apos;);" />
+                    </ui:VisualElement>
+                    <ui:TextField picking-mode="Ignore" label="Server IP:" value="%s" name="serverIpInput" class="text-field-with-icon" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+            <ui:GroupBox name="ActionButtons" class="btn-actions" style="flex-direction: column;">
+                <ui:GroupBox class="btn-row">
+                    <ui:Button text="Join" display-tooltip-when-elided="true" name="joinServerButton" class="btn btn-disabled" />
+                    <ui:Button text="Back" display-tooltip-when-elided="true" name="backButton" class="btn btn-lg" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

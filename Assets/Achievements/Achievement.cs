@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Achievement : ScriptableObject
@@ -47,6 +48,15 @@ public abstract class Achievement : ScriptableObject
         get { return _isUnlocked; }
         set { _isUnlocked = value; }
     }
+
+    private DateTime _unlockedDate;
+
+    public DateTime UnlockedDate
+    {
+        get { return _unlockedDate; }
+        set { _unlockedDate = value; }
+    }
+
 
     public virtual void Init()
     {

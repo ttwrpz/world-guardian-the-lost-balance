@@ -1,9 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <Style src="project://database/Assets/UI/Collectible/Collectible.uss?fileID=7433441132597879392&amp;guid=b32ab751ff864ce42a44249294b2f8e2&amp;type=3#Collectible" />
+    <ui:VisualElement name="Background" class="screen-bg" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Collectibles" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" style="display: none;" />
+            </ui:GroupBox>
+            <ui:GroupBox name="GroupBox" usage-hints="DynamicTransform" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+                <ui:Button text="&#10;" display-tooltip-when-elided="true" name="EndingButton" class="btn-visual btn" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/Collectibles/endings.png?fileID=2800000&amp;guid=a6286000c7a85b84f992d5b068f1ac8f&amp;type=3#endings&apos;);">
+                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Graphics/GUI/Collectibles/endings.png?fileID=2800000&amp;guid=a6286000c7a85b84f992d5b068f1ac8f&amp;type=3#endings&apos;);">
+                        <ui:Label tabindex="-1" text="Endings (%s1/%s2)" display-tooltip-when-elided="true" name="EndingLabel" class="btn-label" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button text="&#10;" display-tooltip-when-elided="true" name="ItemButton" class="btn-visual btn" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/Collectibles/items.png?fileID=2800000&amp;guid=0ff2df02a0bfc554c9dbe0fac0f51a43&amp;type=3#items&apos;);">
+                    <ui:VisualElement style="flex-grow: 1;">
+                        <ui:Label tabindex="-1" text="Items (%s1/%s2)" display-tooltip-when-elided="true" name="ItemLabel" class="btn-label" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button text="&#10;" display-tooltip-when-elided="true" name="LandmarkButton" class="btn-visual btn" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/Collectibles/landmarks.png?fileID=2800000&amp;guid=a09a027f3731f774bb2101c4478295b5&amp;type=3#landmarks&apos;);">
+                    <ui:VisualElement style="flex-grow: 1;">
+                        <ui:Label tabindex="-1" text="Landmarks (%s1/%s2)" display-tooltip-when-elided="true" name="LandmarkLabel" class="btn-label" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button text="&#10;" display-tooltip-when-elided="true" name="LoreButton" class="btn-visual btn" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/Collectibles/lores.png?fileID=2800000&amp;guid=dbf1bbf76af971d4da22993687dd84b7&amp;type=3#lores&apos;);">
+                    <ui:VisualElement style="flex-grow: 1;">
+                        <ui:Label tabindex="-1" text="Lores (%s1/%s2)" display-tooltip-when-elided="true" name="LoreLabel" class="btn-label" />
+                    </ui:VisualElement>
+                </ui:Button>
+            </ui:GroupBox>
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

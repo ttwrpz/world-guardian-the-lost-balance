@@ -16,8 +16,6 @@ public class CreateWorldUIController : MonoBehaviour
     private RadioButtonGroup _worldGameModeRadioInput;
     private VisualElement _worldDifficultyIcon;
     private RadioButtonGroup _worldDifficultyRadioInput;
-    private VisualElement _worldSizeIcon;
-    private RadioButtonGroup _worldSizeRadioInput;
     private Button _createWorldButton;
     private Button _backButton;
 
@@ -28,32 +26,37 @@ public class CreateWorldUIController : MonoBehaviour
     {
         spriteAtlasManager = new("GUI/singleplayer");
 
+        GetUIElements();
+        AttachEventHandlers();
+    }
+
+    private void GetUIElements()
+    {
         _doc = GetComponent<UIDocument>();
         _root = _doc.rootVisualElement;
 
         _worldNameInput = _root.Q<TextField>("worldNameInput");
-        _worldNameInput.RegisterCallback<ChangeEvent<string>>(onWorldNameInputChanged);
-        _worldNameInput.Focus();
-
         _worldSeedInput = _root.Q<TextField>("worldSeedInput");
 
         _worldGameModeIcon = _root.Q<VisualElement>("WorldGameModeIcon");
         _worldGameModeRadioInput = _root.Q<RadioButtonGroup>("worldGameModeRadioInput");
-        _worldGameModeRadioInput.RegisterValueChangedCallback<int>(onWorldGameModeRadioInputChanged);
 
         _worldDifficultyIcon = _root.Q<VisualElement>("WorldDifficultyIcon");
         _worldDifficultyRadioInput = _root.Q<RadioButtonGroup>("worldDifficultyRadioInput");
-        _worldDifficultyRadioInput.RegisterValueChangedCallback<int>(onWorldDifficultyRadioInputChanged);
-
-        _worldSizeIcon = _root.Q<VisualElement>("WorldSizeIcon");
-        _worldSizeRadioInput = _root.Q<RadioButtonGroup>("worldSizeRadioInput");
-        _worldSizeRadioInput.RegisterValueChangedCallback<int>(onWorldSizeRadioInputChanged);
 
         _createWorldButton = _root.Q<Button>("createWorldButton");
-        _createWorldButton.RegisterCallback<ClickEvent>(onCreateWorldButtonClicked);
-
         _backButton = _root.Q<Button>("backButton");
-        _backButton.RegisterCallback<ClickEvent>(onBackButtonClicked);
+    }
+
+    private void AttachEventHandlers()
+    {
+        _worldNameInput.RegisterCallback<ChangeEvent<string>>(onWorldNameInputChanged);
+        _worldNameInput.Focus();
+
+        _worldGameModeRadioInput.RegisterValueChangedCallback<int>(onWorldGameModeRadioInputChanged);
+        _worldDifficultyRadioInput.RegisterValueChangedCallback<int>(onWorldDifficultyRadioInputChanged);
+        _createWorldButton.clicked += onCreateWorldButtonClicked;
+        _backButton.clicked += onBackButtonClicked;
     }
 
     private void onWorldNameInputChanged(ChangeEvent<string> changeEvent)
@@ -74,10 +77,10 @@ public class CreateWorldUIController : MonoBehaviour
     {
         switch (changeEvent.newValue)
         {
-            case (int)World.WorldGameMode.Story:
+            case (int)World.GameMode.Story:
                 _worldGameModeIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-gamemode-story"));
                 break;
-            case (int)World.WorldGameMode.Sandbox:
+            case (int)World.GameMode.Sandbox:
                 _worldGameModeIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-gamemode-sandbox"));
                 break;
         }
@@ -87,58 +90,43 @@ public class CreateWorldUIController : MonoBehaviour
     {
         switch (changeEvent.newValue)
         {
-            case (int)World.WorldDifficulty.Easy:
+            case (int)World.Difficulty.Easy:
                 _worldDifficultyIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-difficulty-easy"));
                 break;
-            case (int)World.WorldDifficulty.Medium:
+            case (int)World.Difficulty.Medium:
                 _worldDifficultyIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-difficulty-medium"));
                 break;
-            case (int)World.WorldDifficulty.Hard:
+            case (int)World.Difficulty.Hard:
                 _worldDifficultyIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-difficulty-hard"));
                 break;
         }
     }
 
-    private void onWorldSizeRadioInputChanged(ChangeEvent<int> changeEvent)
+    private async void onCreateWorldButtonClicked()
     {
-        switch (changeEvent.newValue)
-        {
-            case (int)World.WorldSize.Small:
-                _worldSizeIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-size-small"));
-                break;
-            case (int)World.WorldSize.Medium:
-                _worldSizeIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-size-medium"));
-                break;
-            case (int)World.WorldSize.Large:
-                _worldSizeIcon.style.backgroundImage = new StyleBackground(spriteAtlasManager.GetAtlas("world-size-large"));
-                break;
-        }
-    }
+        if (!_createWorldButton.enabledSelf)
+            return;
 
-    private void onCreateWorldButtonClicked(ClickEvent clickEvent)
-    {
         World world = new()
         {
-            worldName = _worldNameInput.text,
-            worldSeed = World.ConvertFormat(_worldSeedInput.text),
-            worldGameMode = (World.WorldGameMode)_worldGameModeRadioInput.value,
-            worldDifficulty = (World.WorldDifficulty)_worldDifficultyRadioInput.value,
-            worldSize = (World.WorldSize)_worldSizeRadioInput.value,
-            worldCreatedAt = DateTime.Now
+            WorldName = _worldNameInput.text,
+            WorldSeed = World.ConvertFormat(_worldSeedInput.text),
+            WorldGameMode = (World.GameMode)_worldGameModeRadioInput.value,
+            WorldDifficulty = (World.Difficulty)_worldDifficultyRadioInput.value,
+            WorldCreatedAt = DateTime.Now
         };
 
         SaveManager.CreateWorld(world);
+        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
-    private void onBackButtonClicked(ClickEvent clickEvent)
+    private async void onBackButtonClicked()
     {
         if (SaveManager.LoadWorldListEntry().Count() > 0)
         {
-            SceneManager.LoadScene("Assets/Scenes/Singleplayer/Singleplayer.unity");
+            await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
+            return;
         }
-        else
-        {
-            SceneManager.LoadScene("Assets/Scenes/Main/Main.unity");
-        }
+        UIController.BackToMainUI();
     }
 }

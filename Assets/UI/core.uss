@@ -7,6 +7,10 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .btn:hover {
@@ -41,16 +45,8 @@
     flex-basis: 0;
 }
 
-.screen-bg {
-    flex-grow: 1;
-    background-image: url('project://database/Assets/Graphics/GUI/Background.png?fileID=2800000&guid=2162e630600374a4a8bb6c8e3a1c597f&type=3#Background');
-    -unity-background-image-tint-color: rgb(153, 153, 153);
-    background-color: rgba(68, 77, 77, 0);
-    -unity-background-scale-mode: scale-and-crop;
-}
-
 .ui-wrapper {
-    min-width: 750px;
+    min-width: 75%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
@@ -60,7 +56,7 @@
     padding-top: 0;
     padding-bottom: 0;
     flex-grow: 1;
-    max-width: 85%;
+    max-width: 75%;
     -unity-font-definition: url('project://database/Assets/Graphics/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&guid=2fc062e308e3b914cbdf2e8e954886c4&type=3#RD CHULAJARUEK');
     background-color: rgba(51, 51, 51, 0.2);
     border-top-left-radius: 5px;
@@ -89,6 +85,14 @@
     padding-right: 0;
     padding-left: 0;
     white-space: normal;
+}
+
+.screen-bg {
+    flex-grow: 1;
+    background-image: url('project://database/Assets/Graphics/GUI/Background.png?fileID=2800000&guid=2162e630600374a4a8bb6c8e3a1c597f&type=3#Background');
+    -unity-background-image-tint-color: rgb(153, 153, 153);
+    background-color: rgba(68, 77, 77, 0);
+    -unity-background-scale-mode: scale-and-crop;
 }
 
 .subtitleScreen {
@@ -140,4 +144,33 @@
     margin-right: 0;
     margin-top: 6px;
     margin-bottom: 0;
+}
+
+.unity-list-view__item:hover {
+    background-color: rgba(51, 51, 51, 0.3);
+}
+
+.unity-list-view__item {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.progress-bar {
+}
+
+.progress-bar .unity-progress-bar__background {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(128, 128, 128, 0.5);
+    border-right-color: rgba(128, 128, 128, 0.5);
+    border-top-color: rgba(128, 128, 128, 0.5);
+    border-bottom-color: rgba(128, 128, 128, 0.5);
+}
+
+.progress-bar .unity-progress-bar__progress {
+    background-color: rgb(0, 191, 115);
+}
+
+.progress-bar .unity-progress-bar__title {
 }

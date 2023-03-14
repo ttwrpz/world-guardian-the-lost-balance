@@ -3,22 +3,24 @@ using System;
 [Serializable]
 public class World
 {
-    public string worldName;
-    public string worldSeed;
+    public string WorldName { get; set; }
+    public string WorldSeed { get; set; }
 
-    public enum WorldGameMode { Story, Sandbox };
-    public WorldGameMode worldGameMode;
+    public enum GameMode { Story, Sandbox };
+    public GameMode WorldGameMode { get; set; }
 
-    public enum WorldDifficulty { Easy, Medium, Hard };
-    public WorldDifficulty worldDifficulty;
+    public enum Difficulty { Easy, Medium, Hard };
+    public Difficulty WorldDifficulty {get; set; }
 
-    public enum WorldSize { Small, Medium, Large };
-    public WorldSize worldSize;
+    public string WorldFolder { get; set; }
+    public string WorldVersion { get; set; }
+    public DateTime WorldCreatedAt { get; set; }
+    public DateTime WorldModifiedAt { get; set; }
 
-    public string worldFolder;
-    public string worldVersion;
-    public DateTime worldCreatedAt;
-    public DateTime worldModifiedAt;
+    public static string GenerateRandomSeed()
+    {
+        return "";
+    }
 
     public static string ConvertFormat(string seed)
     {

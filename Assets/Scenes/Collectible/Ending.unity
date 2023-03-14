@@ -222,6 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1678746436}
   - component: {fileID: 1678746437}
+  - component: {fileID: 1678746438}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -256,7 +257,20 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: c4255e2071508d84598a5bd0ebebfb21, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: ebf1e5657dc17b44fa0d8350c783b4cb, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: dc5b796181103f6428a5e405a70e799b, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 361009f96dc31b84792ad6ad2a1f80cd, type: 3}
   m_SortingOrder: 0
+--- !u!114 &1678746438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678746435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b59b896152a5ed49b4408771dc195c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleListEntryTemplate: {fileID: 9197481963319205126, guid: 98ffbebc4d52ba94b80595801ce2db66, type: 3}

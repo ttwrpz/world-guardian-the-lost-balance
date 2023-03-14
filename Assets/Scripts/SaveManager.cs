@@ -9,67 +9,61 @@ using UnityEngine;
 
 public class SaveManager
 {
-    public static string _savePath = Application.persistentDataPath + "/saves";
-    public static string _backupPath = Application.persistentDataPath + "/backups";
-
-    [MenuItem("World's Guadian/World/Open Worlds Folder")]
-    static void OpenWorldSaveWorld()
-    {
-        Process.Start("explorer.exe", Path.GetFullPath(_savePath));
-    }
-
-    [MenuItem("World's Guadian/World/Open Backups Folder")]
-    static void OpenBackupWorld()
-    {
-        Process.Start("explorer.exe", Path.GetFullPath(_backupPath));
-    }
+    public static readonly string SavePath = Path.Combine(Application.persistentDataPath, "saves");
+    public static readonly string BackupPath = Path.Combine(Application.persistentDataPath, "backups");
 
     public static void CreateWorld(World world)
     {
-        string _initialWorldPath = Path.Join(_savePath, world.worldName);
-        string _currentWorldPath = _initialWorldPath;
-        int _increment = 0;
-        while (Directory.Exists(_currentWorldPath))
+        string initialWorldPath = Path.Combine(SavePath, world.WorldName);
+        string currentWorldPath = initialWorldPath;
+        int increment = 0;
+        while (Directory.Exists(currentWorldPath))
         {
-            _increment++;
-            _currentWorldPath = string.Concat(_initialWorldPath, " (", _increment, ")");
+            increment++;
+            currentWorldPath = $"{initialWorldPath} ({increment})";
         }
-        Directory.CreateDirectory(_currentWorldPath);
+        Directory.CreateDirectory(currentWorldPath);
 
         BinaryFormatter formatter = new();
-        using FileStream fileStream = new(Path.Join(_currentWorldPath, "level.dat"), FileMode.Create);
+        using FileStream fileStream = new(Path.Combine(currentWorldPath, "level.dat"), FileMode.Create);
         formatter.Serialize(fileStream, world);
     }
 
     public static string[] LoadWorldListEntry()
     {
-        if (!Directory.Exists(_savePath))
+        if (!Directory.Exists(SavePath))
         {
-            Directory.CreateDirectory(_savePath);
-            return new string[] { };
+            Directory.CreateDirectory(SavePath);
+            return Array.Empty<string>();
         }
 
-        return Directory.GetDirectories(_savePath);
+        return Directory.GetDirectories(SavePath);
     }
 
     public static List<World> LoadWorldDataListEntry()
     {
-        string[] directorySaveList = Directory.GetDirectories(_savePath);
         List<World> directorySaveInfo = new();
+
+        if (!Directory.Exists(SavePath))
+        {
+            Directory.CreateDirectory(SavePath);
+            return directorySaveInfo;
+        }
+
+        string[] directorySaveList = Directory.GetDirectories(SavePath);
 
         foreach (string directorySave in directorySaveList)
         {
-            string _saveFile = Path.Join(directorySave, "level.dat");
+            string saveFile = Path.Combine(directorySave, "level.dat");
 
-            if (!File.Exists(_saveFile))
+            if (!File.Exists(saveFile))
                 continue;
 
             BinaryFormatter formatter = new();
-            using FileStream fileStream = new(_saveFile, FileMode.Open);
+            using FileStream fileStream = new(saveFile, FileMode.Open);
 
             World worldSettings = (World)formatter.Deserialize(fileStream);
-            worldSettings.worldFolder = Path.GetFileName(directorySave);
-            //worldSettings.worldModifiedAt = Directory.GetLastWriteTime(_saveFile); When Save World Only
+            worldSettings.WorldFolder = Path.GetFileName(directorySave);
             directorySaveInfo.Add(worldSettings);
         }
 
@@ -78,12 +72,28 @@ public class SaveManager
 
     public static void LoadWorldData(World world)
     {
+        if (world == null)
+            throw new ArgumentNullException(nameof(world));
 
+        string saveFile = Path.Combine(SavePath, world.WorldFolder, "level.dat");
+
+        if (!File.Exists(saveFile))
+            throw new FileNotFoundException("Save file not found.", saveFile);
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        using FileStream fileStream = new(saveFile, FileMode.Open);
+
+        World worldData = (World)formatter.Deserialize(fileStream);
+
+        world.WorldName ??= worldData.WorldName;
+        world.WorldGameMode = world.WorldGameMode.Equals(worldData.WorldGameMode) ? worldData.WorldGameMode : world.WorldGameMode;
+        world.WorldDifficulty = world.WorldDifficulty.Equals(worldData.WorldDifficulty) ? worldData.WorldDifficulty : world.WorldDifficulty;
+        world.WorldModifiedAt = DateTime.Now;
     }
 
     public static void SaveWorldData(World worldNewData)
     {
-        string _saveFile = Path.Join(_savePath, worldNewData.worldFolder, "level.dat");
+        string _saveFile = Path.Combine(SavePath, worldNewData.WorldFolder, "level.dat");
 
         if (!File.Exists(_saveFile))
             return;
@@ -93,31 +103,39 @@ public class SaveManager
 
         World worldData = (World)formatter.Deserialize(fileStream);
 
-        worldData.worldName ??= worldNewData.worldName;
-        worldData.worldGameMode = worldNewData.worldGameMode.Equals(worldData.worldGameMode) ? worldData.worldGameMode : worldNewData.worldGameMode;
-        worldData.worldDifficulty = worldNewData.worldDifficulty.Equals(worldData.worldDifficulty) ? worldData.worldDifficulty : worldNewData.worldDifficulty;
-        worldData.worldModifiedAt = DateTime.Now;
+        worldData.WorldName ??= worldNewData.WorldName;
+        worldData.WorldGameMode = worldNewData.WorldGameMode.Equals(worldData.WorldGameMode) ? worldData.WorldGameMode : worldNewData.WorldGameMode;
+        worldData.WorldDifficulty = worldNewData.WorldDifficulty.Equals(worldData.WorldDifficulty) ? worldData.WorldDifficulty : worldNewData.WorldDifficulty;
+        worldData.WorldModifiedAt = DateTime.Now;
 
+        fileStream.Seek(0, SeekOrigin.Begin);
         formatter.Serialize(fileStream, worldNewData);
+        fileStream.SetLength(fileStream.Position);
+        fileStream.Flush();
     }
 
     public static void DeleteWorld(World world)
     {
-        string _worldFolder = Path.Join(_savePath, world.worldFolder);
+        string worldFolder = Path.Combine(SavePath, world.WorldFolder);
 
-        if (Directory.Exists(_worldFolder))
+        if (Directory.Exists(worldFolder))
         {
-            Directory.Delete(_savePath, true);
+            Directory.Delete(worldFolder, true);
         }
     }
 
     public static string BackupWorld(World world)
     {
-        if (!Directory.Exists(_backupPath))
-            Directory.CreateDirectory(_backupPath);
+        if (!Directory.Exists(BackupPath))
+        {
+            Directory.CreateDirectory(BackupPath);
+        }
 
-        string zipName = string.Concat(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"), "_", world.worldFolder, ".zip");
-        ZipFile.CreateFromDirectory(Path.Join(SaveManager._savePath, world.worldFolder), Path.Join(SaveManager._backupPath, zipName));
+        string zipName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}_{world.WorldFolder}.zip";
+        string sourcePath = Path.Combine(SavePath, world.WorldFolder);
+        string destinationPath = Path.Combine(BackupPath, zipName);
+
+        ZipFile.CreateFromDirectory(sourcePath, destinationPath);
 
         return zipName;
     }

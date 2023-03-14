@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4204304f3db06684e943cc843b7dbcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AchievementListEntryTemplate: {fileID: 9197481963319205126, guid: 6e4006685ad8a6c45946f23408de4aae, type: 3}
 --- !u!114 &657245691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: c4255e2071508d84598a5bd0ebebfb21, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: ebf1e5657dc17b44fa0d8350c783b4cb, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 67f7e5a126e2766478a69c5ccd4dff98, type: 3}
   m_SortingOrder: 0

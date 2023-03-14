@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +22,12 @@ public class EditWorldUIController : MonoBehaviour
 
     private void OnEnable()
     {
+        GetUIElements();
+        AttachEventHandlers();
+    }
+
+    private void GetUIElements()
+    {
         _docs = GetComponent<UIDocument>();
         _root = _docs.rootVisualElement;
 
@@ -35,32 +41,47 @@ public class EditWorldUIController : MonoBehaviour
         _worldFolderLabel.text = _worldFolderLabel.text.Replace("%s", worldData.WorldFolder);
 
         _openSaveFolderButton = _root.Q<Button>("openSaveFolderButton");
-        _openSaveFolderButton.clicked += onOpenSaveFolderButtonClicked;
-
         _backupWorldButton = _root.Q<Button>("backupWorldButton");
-        _backupWorldButton.clicked += onBackupWorldButtonClicked;
-
         _openBackupFolderButton = _root.Q<Button>("openBackupFolderButton");
-        _openBackupFolderButton.clicked += onOpenBackupFolderButtonClicked;
-
         _saveButton = _root.Q<Button>("saveButton");
-        _saveButton.clicked += onSaveButtonClicked;
-
         _backButton = _root.Q<Button>("backButton");
+    }
+
+    private void AttachEventHandlers()
+    {
+        _worldNameInput.RegisterCallback<ChangeEvent<string>>(onWorldNameInputChanged);
+        _openSaveFolderButton.clicked += onOpenSaveFolderButtonClicked;
+        _backupWorldButton.clicked += onBackupWorldButtonClicked;
+        _openBackupFolderButton.clicked += onOpenBackupFolderButtonClicked;
+        _saveButton.clicked += onSaveButtonClicked;
         _backButton.clicked += onBackButtonClicked;
+    }
+
+    private void onWorldNameInputChanged(ChangeEvent<string> changeEvent)
+    {
+        if (changeEvent.newValue.ToString() == "")
+        {
+            _saveButton.SetEnabled(false);
+            _saveButton.AddToClassList("btn-disabled");
+        }
+        else
+        {
+            _saveButton.SetEnabled(true);
+            _saveButton.RemoveFromClassList("btn-disabled");
+        }
     }
 
     private void onOpenSaveFolderButtonClicked()
     {
-        Process.Start("explorer.exe", Path.GetFullPath(Path.Join(SaveManager._savePath, worldData.WorldFolder)));
+        System.Diagnostics.Process.Start("explorer.exe", Path.GetFullPath(Path.Join(SaveManager.SavePath, worldData.WorldFolder)));
     }
 
     private void onBackupWorldButtonClicked()
     {
         World world = new()
         {
-            worldName = worldData.WorldName,
-            worldFolder = worldData.WorldFolder,
+            WorldName = worldData.WorldName,
+            WorldFolder = worldData.WorldFolder,
         };
         string backupName = SaveManager.BackupWorld(world);
         //Show Toast UI
@@ -68,26 +89,29 @@ public class EditWorldUIController : MonoBehaviour
 
     private void onOpenBackupFolderButtonClicked()
     {
-        if (!Directory.Exists(SaveManager._backupPath))
-            Directory.CreateDirectory(SaveManager._backupPath);
+        if (!Directory.Exists(SaveManager.BackupPath))
+            Directory.CreateDirectory(SaveManager.BackupPath);
 
-        Process.Start("explorer.exe", Path.GetFullPath(SaveManager._backupPath));
+        System.Diagnostics.Process.Start("explorer.exe", Path.GetFullPath(SaveManager.BackupPath));
     }
 
-    private void onSaveButtonClicked()
+    private async void onSaveButtonClicked()
     {
+        if (!_saveButton.enabledSelf)
+            return;
+
         World world = new()
         {
-            worldName = _worldNameInput.text,
-            worldFolder = worldData.WorldFolder,
+            WorldName = _worldNameInput.text,
+            WorldFolder = worldData.WorldFolder,
         };
-        //Save Not Working
+        
         SaveManager.SaveWorldData(world);
-        SceneManager.LoadScene("Assets/Scenes/Singleplayer/Singleplayer.unity");
+        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
-    private void onBackButtonClicked()
+    private async void onBackButtonClicked()
     {
-        SceneManager.LoadScene("Assets/Scenes/Singleplayer/Singleplayer.unity");
+        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 }
