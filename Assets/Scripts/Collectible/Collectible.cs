@@ -1,32 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+[CreateAssetMenu(fileName = "Collectible", menuName = "Collectible")]
+public class Collectible : ScriptableObject
 {
-    public CollectibleSO collectibleSO;
-
-    private CollectibleType type;
-
-    private void Start()
+    public enum CollectibleType
     {
-        type = collectibleSO.type;
+        Endings,
+        Items,
+        Landmarks,
+        Lores
     }
 
-    private void OnMouseDown()
-    {
-        Collect();
-    }
-
-    private void Collect()
-    {
-        // Mark collectible as collected
-        collectibleSO.isUnlocked = true;
-
-        // Save updated collectible list to a file
-        FindAnyObjectByType<CollectibleManager>().SaveCollectibles();
-
-        // Display a message to the player
-        Debug.Log("You collected " + collectibleSO.name + "!");
-    }
+    public string id;
+    public CollectibleType type;
+    public Sprite icon;
+    public string collectibleName;
+    public string description;
+    public bool isCollected;
+    public DateTime collectedDate;
 }

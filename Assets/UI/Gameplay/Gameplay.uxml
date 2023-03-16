@@ -1,9 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Gameplay/Gameplay.uss?fileID=7433441132597879392&amp;guid=cbb30d7809e8c8042ba8e741b9e19fb8&amp;type=3#Gameplay" />
+    <ui:GroupBox name="UIWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-grow: 1; height: 100%; flex-wrap: wrap; justify-content: space-between; -unity-font-definition: url(&apos;project://database/Assets/Graphics/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&amp;guid=2fc062e308e3b914cbdf2e8e954886c4&amp;type=3#RD CHULAJARUEK&apos;);">
+        <ui:GroupBox name="TopWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; justify-content: space-between;">
+            <ui:GroupBox name="Status" class="placeholder" style="position: relative; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; width: 280px; top: auto; left: auto; right: auto; bottom: auto;">
+                <ui:Label tabindex="-1" text="Earth Status" display-tooltip-when-elided="true" name="TitleLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; -unity-font-style: bold;" />
+                <ui:GroupBox name="ParameterBox">
+                    <ui:ProgressBar value="22" title="Humans Population" name="HumanBar" />
+                    <ui:ProgressBar value="22" title="Animals Population" name="AnimalBar" />
+                    <ui:ProgressBar value="22" title="Crops Area" name="CropsBar" />
+                    <ui:ProgressBar value="22" title="Forest Area" name="ForestBar" />
+                    <ui:ProgressBar value="22" title="Factory Area" name="FactoryBar" />
+                    <ui:ProgressBar value="22" title="Green House Gas" name="GreenhouseGasBar" />
+                    <ui:ProgressBar value="22" title="Temperature" name="TemperatureBar" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+            <ui:GroupBox name="MenuButtons" class="placeholder" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; flex-direction: row; justify-content: flex-end; align-items: flex-start; align-self: flex-start;">
+                <ui:Button text="Achivements" display-tooltip-when-elided="true" name="AchievementButton">
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                </ui:Button>
+                <ui:Button text="Collectibles" display-tooltip-when-elided="true" name="CollectibleButton">
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                </ui:Button>
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton">
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                </ui:Button>
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="MiddleWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: flex-end; justify-content: center; flex-grow: 1;">
+            <ui:GroupBox name="MultiplayerMenu" class="placeholder" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; width: 280px; height: 100%;">
+                <ui:GroupBox name="PlayerInfo" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                    <ui:Label tabindex="-1" text="Protecter #2" display-tooltip-when-elided="true" name="PlayerName" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font-style: bold;" />
+                    <ui:Label tabindex="-1" text="Connected" display-tooltip-when-elided="true" name="PlayerStatus" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font-style: normal;" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="BottomWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row;">
+            <ui:GroupBox name="Control" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                <ui:GroupBox name="TimeControl" class="placeholder" style="position: relative; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Month&lt;/b&gt; %s1 &lt;b&gt;Year&lt;/b&gt; %s2" display-tooltip-when-elided="true" name="DateTimeLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center;" />
+                    <ui:GroupBox name="ActionsButtons" style="flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; justify-content: center;">
+                        <ui:Button text="Pause" display-tooltip-when-elided="true" name="PauseButton">
+                            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                        </ui:Button>
+                        <ui:Button text="Resume" display-tooltip-when-elided="true" name="ResumeButton">
+                            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                        </ui:Button>
+                        <ui:Button text="Speed Up 2x" display-tooltip-when-elided="true" name="SpeedUp2xButton">
+                            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                        </ui:Button>
+                        <ui:Button text="Speed Up 3x" display-tooltip-when-elided="true" name="SpeedUp3xButton">
+                            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                        </ui:Button>
+                    </ui:GroupBox>
+                </ui:GroupBox>
+                <ui:GroupBox name="MapBox" class="placeholder" style="position: relative; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; height: 150px; width: 150px;">
+                    <ui:VisualElement name="MapVisual" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+            <ui:GroupBox name="Gameplay" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-grow: 1;">
+                <ui:GroupBox name="News" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                    <ui:Label tabindex="-1" text="News" display-tooltip-when-elided="true" name="NewsLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; -unity-font-style: bold;" />
+                </ui:GroupBox>
+                <ui:GroupBox name="SkillsBox" class="placeholder" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                    <ui:ListView virtualization-method="DynamicHeight" name="SkillsList" show-border="false" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

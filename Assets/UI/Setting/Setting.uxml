@@ -1,0 +1,27 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <ui:GroupBox name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper">
+            <ui:GroupBox name="ScreenTitleWrapper" class="screnTitle-wrapper" style="margin-bottom: 10px;">
+                <ui:Label text="Settings" display-tooltip-when-elided="true" name="TitleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label display-tooltip-when-elided="true" name="SubtitleScreenLabel" class="subtitleScreen" style="display: none;" />
+            </ui:GroupBox>
+            <ui:ScrollView>
+                <ui:GroupBox name="Audio" style="margin-left: 0; margin-right: 0; margin-top: 20px; margin-bottom: 20px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
+                    <ui:Label tabindex="-1" text="Audio Settings" display-tooltip-when-elided="true" name="SectionTitle" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; font-size: 16px; color: rgb(229, 229, 229); -unity-font-style: bold;" />
+                    <ui:Slider label="Master Volume" high-value="1" name="MasterSlider" value="1" />
+                    <ui:Slider label="Music" high-value="1" name="MusicSlider" value="1" />
+                    <ui:Slider label="Sound Effects" high-value="1" name="SfxSlider" value="1" />
+                </ui:GroupBox>
+                <ui:GroupBox name="Video" style="margin-left: 0; margin-right: 0; margin-top: 20px; margin-bottom: 20px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
+                    <ui:Label tabindex="-1" text="Video &amp; Graphics Settings" display-tooltip-when-elided="true" name="SectionTitle" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; font-size: 16px; color: rgb(229, 229, 229); -unity-font-style: bold;" />
+                    <ui:DropdownField label="Windows Mode" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="WindowModeDropdown" />
+                    <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="ResolutionDropdown" />
+                </ui:GroupBox>
+            </ui:ScrollView>
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="padding-right: 3px;">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

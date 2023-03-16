@@ -45,6 +45,44 @@
     flex-basis: 0;
 }
 
+.screnTitle-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 6px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: rgb(229, 229, 229);
+    -unity-text-align: middle-center;
+}
+
+.screen-bg {
+    flex-grow: 1;
+    background-image: url('project://database/Assets/Graphics/GUI/Background.png?fileID=2800000&guid=2162e630600374a4a8bb6c8e3a1c597f&type=3#Background');
+    -unity-background-image-tint-color: rgb(153, 153, 153);
+    background-color: rgba(68, 77, 77, 0);
+    -unity-background-scale-mode: scale-and-crop;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.subtitleScreen {
+    justify-content: flex-start;
+    align-items: stretch;
+    -unity-font-style: normal;
+    padding-right: 0;
+    padding-left: 0;
+    white-space: normal;
+}
+
 .ui-wrapper {
     min-width: 75%;
     margin-left: auto;
@@ -66,44 +104,6 @@
     justify-content: space-around;
 }
 
-.screnTitle-wrapper {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    color: rgb(229, 229, 229);
-    -unity-text-align: middle-center;
-}
-
-.titleScreen {
-    font-size: 20px;
-    -unity-font-style: bold;
-    padding-right: 0;
-    padding-left: 0;
-    white-space: normal;
-}
-
-.screen-bg {
-    flex-grow: 1;
-    background-image: url('project://database/Assets/Graphics/GUI/Background.png?fileID=2800000&guid=2162e630600374a4a8bb6c8e3a1c597f&type=3#Background');
-    -unity-background-image-tint-color: rgb(153, 153, 153);
-    background-color: rgba(68, 77, 77, 0);
-    -unity-background-scale-mode: scale-and-crop;
-}
-
-.subtitleScreen {
-    justify-content: flex-start;
-    align-items: stretch;
-    -unity-font-style: normal;
-    padding-right: 0;
-    padding-left: 0;
-    white-space: normal;
-}
-
 .btn-main-menu {
     border-left-color: rgba(51, 51, 51, 0.4);
     border-right-color: rgba(51, 51, 51, 0.4);
@@ -122,6 +122,14 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
+}
+
+.titleScreen {
+    -unity-font-style: bold;
+    padding-right: 0;
+    padding-left: 0;
+    white-space: normal;
+    font-size: 20px;
 }
 
 .btn-disabled:hover {
@@ -173,4 +181,8 @@
 }
 
 .progress-bar .unity-progress-bar__title {
+}
+
+.unity-collection-view__item--selected:hover {
+    background-color: rgba(51, 100, 153, 0.3);
 }

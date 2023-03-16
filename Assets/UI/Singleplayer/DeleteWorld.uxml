@@ -5,7 +5,7 @@
         <ui:GroupBox name="UIWrapper" class="ui-wrapper">
             <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
                 <ui:Label text="Singleplayer" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
-                <ui:Label text="Delete World &quot;%s&quot;" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+                <ui:Label text="Delete World &lt;b&gt;&quot;%s&quot;&lt;/b&gt;" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
             </ui:GroupBox>
             <ui:Label tabindex="-1" text="Are you sure you want to delete this world?\n&apos;%s&apos; will be lost forever!" display-tooltip-when-elided="true" name="deleteLabel" parse-escape-sequences="true" style="-unity-text-align: middle-center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229); font-size: 20px; -unity-font-style: bold;" />
             <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="padding-right: 3px; align-items: center;">

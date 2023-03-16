@@ -1,167 +1,93 @@
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 public class AchievementManager : MonoBehaviour
 {
-    private static AchievementManager _instance;
+    public bool IsLoaded { get; private set; }
 
-    [SerializeField]
-    private List<Achievement> achievements;
+    public List<Achievement> achievements;
+    private string achievementsSavePath;
 
-    public static AchievementManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindAnyObjectByType<AchievementManager>();
-
-                if (_instance == null)
-                {
-                    GameObject go = new()
-                    {
-                        name = "AchievementManager"
-                    };
-                    _instance = go.AddComponent<AchievementManager>();
-                }
-            }
-
-            return _instance;
-        }
-    }
-    
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        achievementsSavePath = Path.Combine(Application.persistentDataPath, "achievements.json");
 
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
+        LoadAchievementsFromResources();
+        LoadSavedAchievements();
+    }
 
-        foreach (Achievement achievement in achievements)
+    public void CreateSaveFileIfNotExists()
+    {
+        if (!File.Exists(achievementsSavePath))
         {
-            achievement.Init();
+            achievements = new();
+            SaveAchievements();
         }
     }
 
-    public static List<Achievement> GetAchievements()
+    private void LoadAchievementsFromResources()
     {
-        AchievementManager manager = FindAnyObjectByType<AchievementManager>();
-        if (manager != null)
-        {
-            return manager.achievements;
-        }
-        else
-        {
-            Debug.LogWarning("Could not find AchievementManager in the scene! Trying to create one.");
-
-            GameObject go = new("AchievementManager");
-            manager = go.GetComponent<AchievementManager>();
-
-            return manager.achievements;
-        }
+        achievements.AddRange(Resources.LoadAll<Achievement>("Achievements"));
     }
 
-    public static List<Achievement> GetUnlockedAchievements()
+    private void LoadSavedAchievements()
     {
-        AchievementManager manager = FindAnyObjectByType<AchievementManager>();
-        if (manager != null)
+        if (File.Exists(achievementsSavePath))
         {
-            List<Achievement> unlockedAchievements = new List<Achievement>();
-            foreach (Achievement achievement in manager.achievements)
+            string savedAchievementsJson = File.ReadAllText(achievementsSavePath);
+            Achievement[] savedAchievements = JsonUtility.FromJson<Achievement[]>(savedAchievementsJson);
+
+            foreach (Achievement savedAchievement in savedAchievements)
             {
-                if (achievement.IsUnlocked)
+                Achievement achievement = GetAchievementByID(savedAchievement.id);
+                if (achievement != null)
                 {
-                    unlockedAchievements.Add(achievement);
+                    achievement.isUnlocked = savedAchievement.isUnlocked;
+                    achievement.unlockedDate = savedAchievement.unlockedDate;
                 }
             }
-            return unlockedAchievements;
         }
-        else
-        {
-            Debug.LogWarning("Could not find AchievementManager in the scene! Trying to create one.");
 
-            GameObject go = new("AchievementManager");
-            manager = go.GetComponent<AchievementManager>();
-
-            return manager.achievements;
-        }
+        IsLoaded = true;
     }
 
-    public static void LoadAchievementsFromResourcesFolder()
+    public void SaveAchievements()
     {
-        AchievementManager manager = Instance;
-        if (manager == null)
-        {
-            GameObject go = new("AchievementManager");
-            manager = go.AddComponent<AchievementManager>();
-        }
-
-        Achievement[] achievements = Resources.LoadAll<Achievement>("Achievements");
-
-        foreach (Achievement achievement in achievements)
-        {
-            if (!manager.achievements.Contains(achievement))
-            {
-                manager.achievements.Add(achievement);
-            }
-        }
+        string achievementsJson = JsonUtility.ToJson(achievements.ToArray(), true);
+        File.WriteAllText(achievementsSavePath, achievementsJson);
     }
 
-    public static void AddAchievement(Achievement achievement)
+    public List<Achievement> GetAchievements()
     {
-        AchievementManager manager = Instance;
-
-        if (manager != null)
-        {
-            manager.achievements.Add(achievement);
-        }
-        else
-        {
-            Debug.LogWarning("Could not find AchievementManager in the scene! Trying to create one.");
-
-            GameObject go = new("AchievementManager");
-            manager = go.AddComponent<AchievementManager>();
-            manager.achievements = new List<Achievement>
-            {
-                achievement
-            };
-        }
+        return achievements;
     }
 
-    public static bool RemoveAchievement(string id)
+    public List<Achievement> GetUnlockedAchievements()
     {
-        AchievementManager manager = FindAnyObjectByType<AchievementManager>();
-        if (manager != null)
+        if (achievements == null || achievements.Count == 0)
         {
-            Achievement achievement = manager.achievements.Find(a => a.Id == id);
-
-            if (achievement != null)
-            {
-                manager.achievements.Remove(achievement);
-                return true;
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Could not find AchievementManager in the scene!");
+            Debug.LogWarning("No achievements found. Make sure they are loaded correctly.");
+            return new List<Achievement>();
         }
 
-        return false;
+        return achievements.Where(a => a.isUnlocked).ToList();
+    }
+
+    public Achievement GetAchievementByID(string id)
+    {
+        return achievements.Find(achievement => achievement.id == id);
     }
 
     public void UnlockAchievement(string id)
     {
-        Achievement achievement = achievements.Find(a => a.Id == id);
-
-        if (achievement != null && !achievement.IsUnlocked)
+        Achievement achievement = GetAchievementByID(id);
+        if (achievement != null && !achievement.isUnlocked)
         {
-            achievement.Unlock();
+            achievement.isUnlocked = true;
+            achievement.unlockedDate = System.DateTime.Now.ToString();
+            SaveAchievements();
         }
     }
 }

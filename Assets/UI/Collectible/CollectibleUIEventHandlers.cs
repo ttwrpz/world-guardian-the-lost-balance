@@ -8,21 +8,21 @@ public class CollectibleUIEventHandlers : MonoBehaviour
 {
     public static async void onEndingButtonClicked()
     {
-        await UIController.LoadSceneAsync("Collectible/Ending");
+        await UIController.LoadSceneAsync("Collectible/Endings");
     }
 
     public static async void onItemButtonClicked()
     {
-        await UIController.LoadSceneAsync("Collectible/Item");
+        await UIController.LoadSceneAsync("Collectible/Items");
     }
     public static async void onLandmarkButtonClicked()
     {
-        await UIController.LoadSceneAsync("Collectible/Landmark");
+        await UIController.LoadSceneAsync("Collectible/Landmarks");
     }
 
     public static async void onLoreButtonClicked()
     {
-        await UIController.LoadSceneAsync("Collectible/Lore");
+        await UIController.LoadSceneAsync("Collectible/Lores");
     }
 
     public static async void onBackToCollectibleButtonClicked()

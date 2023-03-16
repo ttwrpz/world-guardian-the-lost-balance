@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <ui:GroupBox name="Background" class="screen-bg">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper" style="justify-content: center;">
+            <ui:GroupBox name="ScreenTitleWrapper" class="screnTitle-wrapper" style="margin-bottom: 10px;">
+                <ui:Label text="Credits" display-tooltip-when-elided="true" name="TitleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label display-tooltip-when-elided="true" name="SubtitleScreenLabel" class="subtitleScreen" style="display: none;" />
+            </ui:GroupBox>
+            <ui:ScrollView>
+                <ui:GroupBox name="Developer" style="margin-left: 0; margin-right: 0; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
+                    <ui:Label tabindex="-1" text="Developers" display-tooltip-when-elided="true" name="SectionTitle" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; font-size: 16px; color: rgb(229, 229, 229); -unity-font-style: bold;" />
+                    <ui:Label tabindex="-1" text="Theerawat Patthawee" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                    <ui:Label tabindex="-1" text="Annwa Hasunee" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                    <ui:Label tabindex="-1" text="Pannathorn Srinamburi" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                </ui:GroupBox>
+                <ui:GroupBox name="ProgramsAndTools" style="margin-left: 0; margin-right: 0; margin-top: 1px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
+                    <ui:Label tabindex="-1" text="Programs &amp; Tools" display-tooltip-when-elided="true" name="SectionTitle" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; font-size: 16px; color: rgb(229, 229, 229); -unity-font-style: bold;" />
+                    <ui:Label tabindex="-1" text="Adobe Photoshop" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                    <ui:Label text="Bfx" display-tooltip-when-elided="true" name="Content" enable-rich-text="true" tabindex="-1" style="-unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                    <ui:Label tabindex="-1" text="Blender" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                    <ui:Label tabindex="-1" text="Pixilart" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                    <ui:Label tabindex="-1" text="Soundraw" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                    <ui:Label tabindex="-1" text="Unity" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                    <ui:Label tabindex="-1" text="Visual Studio" display-tooltip-when-elided="true" name="Content" style="-unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                </ui:GroupBox>
+            </ui:ScrollView>
+            <ui:GroupBox name="ActionButtons" class="btn-row btn-actions" style="padding-right: 3px;">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

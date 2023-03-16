@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -7,6 +6,7 @@ public class MainUIController : MonoBehaviour
 {
     private UIDocument _doc;
     private VisualElement _root;
+    private Label _versionLabel;
     private Button _singleplayerButton;
     private Button _multiplayerButton;
     private Button _achievementButton;
@@ -14,16 +14,6 @@ public class MainUIController : MonoBehaviour
     private Button _creditButton;
     private Button _settingButton;
     private Button _quitButton;
-    
-    private VisualElement _ContentWrapper;
-
-    [SerializeField]
-    private VisualTreeAsset _settingsContentTemplate;
-    private VisualElement _settingsContent;
-
-    [SerializeField]
-    private VisualTreeAsset _creditsContentTemplate;
-    private VisualElement _creditsContent;
 
     private void OnEnable()
     {
@@ -36,6 +26,9 @@ public class MainUIController : MonoBehaviour
         _doc = GetComponent<UIDocument>();
         _root = _doc.rootVisualElement;
 
+        _versionLabel = _root.Q<Label>("Version");
+        _versionLabel.text = _versionLabel.text.Replace("%s", Application.version);
+
         _singleplayerButton = _root.Q<Button>("SingleplayerButton");
         _multiplayerButton = _root.Q<Button>("MultiplayerButton");
         _achievementButton = _root.Q<Button>("AchievementButton");
@@ -43,12 +36,6 @@ public class MainUIController : MonoBehaviour
         _creditButton = _root.Q<Button>("CreditButton");
         _settingButton = _root.Q<Button>("SettingButton");
         _quitButton = _root.Q<Button>("QuitButton");
-
-        _ContentWrapper = _root.Q<VisualElement>("ContentWrapper");
-
-        _settingsContent = _settingsContentTemplate.CloneTree();
-
-        _creditsContent = _creditsContentTemplate.CloneTree();
     }
 
     private void AttachEventHandlers()
@@ -58,71 +45,38 @@ public class MainUIController : MonoBehaviour
         _achievementButton.clicked += onAchievementButtonClicked;
         _collectibleButton.clicked += onCollectibleButtonClicked;
         _creditButton.clicked += onCreditButtonButtonClicked;
-        _settingButton.clicked += onSettingButtonClicked;
+        _settingButton.clicked += onSettingButtonButtonClicked;
         _quitButton.clicked += onQuitButtonClicked;
     }
 
-    private void onSingleplayerButtonClicked()
+    private async void onSingleplayerButtonClicked()
     {
-        SceneManager.LoadScene("Assets/Scenes/Singleplayer/Singleplayer.unity");
+        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
-    private void onMultiplayerButtonClicked()
+    private async void onMultiplayerButtonClicked()
     {
-        SceneManager.LoadScene("Assets/Scenes/Multiplayer/Multiplayer.unity");
+        await UIController.LoadSceneAsync("Multiplayer/Multiplayer");
     }
 
-    private void onAchievementButtonClicked()
+    private async void onAchievementButtonClicked()
     {
-        SceneManager.LoadScene("Assets/Scenes/Achievement/Achievement.unity");
+        await UIController.LoadSceneAsync("Achievement/Achievement");
     }
 
-    private void onCollectibleButtonClicked()
+    private async void onCollectibleButtonClicked()
     {
-        SceneManager.LoadScene("Assets/Scenes/Collectible/Collectible.unity");
+        await UIController.LoadSceneAsync("Collectible/Collectible");
     }
 
-    private void onCreditButtonButtonClicked()
+    private async void onCreditButtonButtonClicked()
     {
-        if (_ContentWrapper.enabledSelf && _ContentWrapper.Q<Label>("TitleScreenLabel")?.text == _creditsContent.Q<Label>("TitleScreenLabel").text)
-        {
-            SetEnableContentWrapper(false);
-        }
-        else
-        {
-            SetEnableContentWrapper(true);
-            _ContentWrapper.Add(_creditsContent);
-        }
+        await UIController.LoadSceneAsync("Main/Credit");
     }
 
-    private void onSettingButtonClicked()
+    private async void onSettingButtonButtonClicked()
     {
-        if (_ContentWrapper.enabledSelf && _ContentWrapper.Q<Label>("TitleScreenLabel")?.text == _settingsContent.Q<Label>("TitleScreenLabel").text)
-        {
-            SetEnableContentWrapper(false);
-        }
-        else
-        {
-            SetEnableContentWrapper(true);
-            _ContentWrapper.Add(_settingsContent);
-        }
-    }
-
-    private void onCloseContentWrapperButtonClicked()
-    {
-        SetEnableContentWrapper(false);
-    }
-
-    private void SetEnableContentWrapper(bool enable)
-    {
-        _ContentWrapper.SetEnabled(enable);
-        _ContentWrapper.style.display = enable
-            ? DisplayStyle.Flex
-            : DisplayStyle.None;
-        _ContentWrapper.style.visibility = enable
-            ? Visibility.Visible
-            : Visibility.Hidden;
-        _ContentWrapper.Clear();
+        await UIController.LoadSceneAsync("Setting/Setting");
     }
 
     private void onQuitButtonClicked()

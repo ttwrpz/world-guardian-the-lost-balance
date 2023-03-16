@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class CollectibleUIController : MonoBehaviour
@@ -20,8 +15,17 @@ public class CollectibleUIController : MonoBehaviour
     private Label _landmarkLabel;
     private Label _loreLabel;
 
+    private CollectibleManager _collectibleManager;
+
     private void OnEnable()
     {
+        _collectibleManager = FindFirstObjectByType<CollectibleManager>();
+        if (_collectibleManager == null)
+        {
+            Debug.LogError("AchievementManager not found in the scene.");
+            return;
+        }
+
         GetUIElements();
         AttachEventHandlers();
     }
@@ -33,30 +37,31 @@ public class CollectibleUIController : MonoBehaviour
 
         _endingButton = _root.Q<Button>("EndingButton");
         _endingLabel = _root.Q<Label>("EndingLabel");
-        _endingLabel.text = _endingLabel.text
-            .Replace("%s1", "")
-            .Replace("%s2", "");
+        UpdateCollectibleLabel(_endingLabel, Collectible.CollectibleType.Endings);
 
         _itemButton = _root.Q<Button>("ItemButton");
         _itemLabel = _root.Q<Label>("ItemLabel");
-        _itemLabel.text = _itemLabel.text
-            .Replace("%s1", "")
-            .Replace("%s2", "");
+        UpdateCollectibleLabel(_itemLabel, Collectible.CollectibleType.Items);
 
         _landmarkButton = _root.Q<Button>("LandmarkButton");
         _landmarkLabel = _root.Q<Label>("LandmarkLabel");
-        _landmarkLabel.text = _landmarkLabel.text
-            .Replace("%s1", "")
-            .Replace("%s2", "");
+        UpdateCollectibleLabel(_landmarkLabel, Collectible.CollectibleType.Landmarks);
 
         _loreButton = _root.Q<Button>("LoreButton");
         _loreLabel = _root.Q<Label>("LoreLabel");
-        _loreLabel.text = _loreLabel.text
-            .Replace("%s1", "")
-            .Replace("%s2", "");
+        UpdateCollectibleLabel(_loreLabel, Collectible.CollectibleType.Lores);
 
         _backButton = _root.Q<Button>("BackButton");
+    }
 
+    private void UpdateCollectibleLabel(Label label, Collectible.CollectibleType type)
+    {
+        int collectedCount = _collectibleManager.GetCollectedCountByType(type);
+        int totalCount = _collectibleManager.GetTotalCountByType(type);
+
+        label.text = label.text
+            .Replace("%s1", collectedCount.ToString())
+            .Replace("%s2", totalCount.ToString());
     }
 
     private void AttachEventHandlers()

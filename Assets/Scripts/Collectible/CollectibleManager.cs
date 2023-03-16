@@ -1,102 +1,79 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 public class CollectibleManager : MonoBehaviour
 {
-    public string collectiblePath = Path.Join(Application.persistentDataPath,"/collectibles.dat");
+    private CollectibleData collectibleData;
+    private string collectibleSavePath;
 
-    public Dictionary<CollectibleType, CollectibleSO> collectibles = new();
-    public Dictionary<CollectibleType, List<CollectibleSO>> collectedCollectibles = new();
-
-    private void Start()
+    private void Awake()
     {
-        LoadCollectibles();
-        LoadCollectedCollectibles();
+        collectibleSavePath = Path.Combine(Application.persistentDataPath, "collectibles.json");
+        LoadCollectibleData();
+        CreateSaveFileIfNotExists();
     }
 
-    private void LoadCollectibles()
+    public void CreateSaveFileIfNotExists()
     {
-        CollectibleSO[] collectiblesArray = Resources.LoadAll<CollectibleSO>("Collectibles");
-
-        foreach (CollectibleSO collectible in collectiblesArray)
+        if (!File.Exists(collectibleSavePath))
         {
-            if (collectible.prefab != null)
+            collectibleData = new()
             {
-                //Instantiate(collectible.prefab, collectible.spawnPosition, Quaternion.identity);
-            }
-            collectibles.Add(collectible.type, collectible);
+                unlockedCollectibles = new List<string>()
+            };
+            SaveCollectibleData();
         }
     }
 
-    private void LoadCollectedCollectibles()
+    public void LoadCollectibleData()
     {
-        if (File.Exists(collectiblePath))
+        if (File.Exists(collectibleSavePath))
         {
-            BinaryFormatter formatter = new();
-            using FileStream file = File.Open(collectiblePath, FileMode.Open);
-            collectedCollectibles = (Dictionary<CollectibleType, List<CollectibleSO>>)formatter.Deserialize(file);
+            string json = File.ReadAllText(collectibleSavePath);
+            collectibleData = JsonUtility.FromJson<CollectibleData>(json);
         }
         else
         {
-            foreach (CollectibleType type in Enum.GetValues(typeof(CollectibleType)))
-            {
-                collectedCollectibles.Add(type, new List<CollectibleSO>());
-            }
+            collectibleData = new CollectibleData();
         }
     }
 
-    public List<CollectibleSO> GetCollectiblesByType(CollectibleType type)
+    public List<Collectible> LoadCollectiblesByType(Collectible.CollectibleType type)
     {
-        List<CollectibleSO> collectiblesOfType = new();
-
-        foreach (CollectibleSO collectible in collectibles.Values)
-        {
-            if (collectible.type == type)
-            {
-                collectiblesOfType.Add(collectible);
-            }
-        }
-
-        return collectiblesOfType;
+        return new List<Collectible>(Resources.LoadAll<Collectible>($"Collectibles/{type}"));
     }
 
-    public void SaveCollectibles()
+    public int GetCollectedCountByType(Collectible.CollectibleType type)
     {
-        BinaryFormatter formatter = new();
-        using FileStream file = File.Create(collectiblePath);
-        formatter.Serialize(file, collectibles);
+        List<Collectible> collectibles = LoadCollectiblesByType(type);
+        return collectibles.Count(c => IsCollectibleUnlocked(c.id));
     }
 
-    public void AddCollectible(CollectibleSO collectible)
+    public int GetTotalCountByType(Collectible.CollectibleType type)
     {
-        if (!collectibles.ContainsKey(collectible.type))
+        List<Collectible> collectibles = LoadCollectiblesByType(type);
+        return collectibles.Count;
+    }
+
+    public void SaveCollectibleData()
+    {
+        string json = JsonUtility.ToJson(collectibleData);
+        File.WriteAllText(collectibleSavePath, json);
+    }
+
+    public void UnlockCollectible(string id)
+    {
+        if (!collectibleData.unlockedCollectibles.Contains(id))
         {
-            collectible.isUnlocked = false;
-            collectibles.Add(collectible.type, collectible);
-            SaveCollectibles();
-        }
-        else
-        {
-            Debug.LogWarning($"A collectible with type {collectible.type} already exists!");
+            collectibleData.unlockedCollectibles.Add(id);
+            SaveCollectibleData();
         }
     }
 
-    public void RemoveCollectible(CollectibleType type)
+    public bool IsCollectibleUnlocked(string id)
     {
-        if (collectibles.ContainsKey(type))
-        {
-            collectibles.Remove(type);
-            SaveCollectibles();
-        }
-        else
-        {
-            Debug.LogWarning($"No collectible with type {type} exists!");
-        }
+        return collectibleData?.unlockedCollectibles.Contains(id) ?? false;
     }
 }

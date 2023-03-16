@@ -1,9 +1,9 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using static Collectible;
 
 public class AchievementUIController : MonoBehaviour
 {
@@ -19,10 +19,24 @@ public class AchievementUIController : MonoBehaviour
     List<Achievement> AchievementList;
     List<Achievement> UnlockedAchievementList;
 
+    private AchievementManager _achievementManager;
+
     private void OnEnable()
     {
-        EnumerateAllAchievements();
+        _achievementManager = FindFirstObjectByType<AchievementManager>();
+        if (_achievementManager == null)
+        {
+            Debug.LogError("AchievementManager not found in the scene.");
+            return;
+        }
+
         GetUIElements();
+        StartCoroutine(EnumerateAndInitialize());
+    }
+    private IEnumerator EnumerateAndInitialize()
+    {
+        yield return StartCoroutine(EnumerateAllAchievements());
+        UpdateUIElements();
         AttachEventHandlers();
         InitializeAchievementList();
     }
@@ -32,15 +46,22 @@ public class AchievementUIController : MonoBehaviour
         _doc = GetComponent<UIDocument>();
         _root = _doc.rootVisualElement;
 
-        _subtitleScreenLabel = _root.Q<Label>("subtitleScreenLabel");
-        _subtitleScreenLabel.text = _subtitleScreenLabel.text.Replace("%1", UnlockedAchievementList.Count().ToString()).Replace("%2", AchievementList.Count().ToString());
-
-        _achievementProgressBar = _root.Q<ProgressBar>("achievementProgressBar");
-        _achievementProgressBar.value = AchievementList.Count() != 0 ? (UnlockedAchievementList.Count() / AchievementList.Count()) * 100f : 0f;
-
         _achievementList = _root.Q<ListView>("achievementList");
 
+        _subtitleScreenLabel = _root.Q<Label>("subtitleScreenLabel");
+
+        _achievementProgressBar = _root.Q<ProgressBar>("achievementProgressBar");
+
         _backButton = _root.Q<Button>("backButton");
+    }
+
+    private void UpdateUIElements()
+    {
+        _subtitleScreenLabel.text = _subtitleScreenLabel.text
+                .Replace("%1", UnlockedAchievementList.Count().ToString())
+                .Replace("%2", AchievementList.Count().ToString());
+
+        _achievementProgressBar.value = CalculateProgressPercentage();
     }
 
     private void AttachEventHandlers()
@@ -48,25 +69,37 @@ public class AchievementUIController : MonoBehaviour
         _backButton.clicked += onBackButtonClicked;
     }
 
+    private float CalculateProgressPercentage()
+    {
+        int collectedCount = AchievementList.Count();
+        int totalCount = UnlockedAchievementList.Count();
+
+        if (totalCount == 0)
+            return 0f;
+
+        return ((float)collectedCount / totalCount) * 100f;
+    }
+
     private void onBackButtonClicked()
     {
         UIController.BackToMainUI();
     }
 
-    void EnumerateAllAchievements()
+    IEnumerator EnumerateAllAchievements()
     {
-        AchievementList = new();
-        AchievementList.AddRange(AchievementManager.GetAchievements());
-        UnlockedAchievementList = AchievementList.Count > 0 ? AchievementList.Where(a => a.IsUnlocked).ToList() : new();
+        yield return new WaitUntil(() => _achievementManager.IsLoaded);
+
+        AchievementList = _achievementManager.GetAchievements();
+        UnlockedAchievementList = _achievementManager.GetUnlockedAchievements();
     }
 
-    private readonly Queue<VisualElement> _AchievementListEntryPool = new();
+    private readonly Stack<VisualElement> _AchievementListEntryPool = new();
 
     private VisualElement GetAchievementListEntry()
     {
         if (_AchievementListEntryPool.Count > 0)
         {
-            return _AchievementListEntryPool.Dequeue();
+            return _AchievementListEntryPool.Pop();
         }
         else
         {
@@ -74,28 +107,33 @@ public class AchievementUIController : MonoBehaviour
         }
     }
 
-    private void ReleaseAchievementListEntry(VisualElement worldListEntry)
-    {
-        _AchievementListEntryPool.Enqueue(worldListEntry);
-    }
-
     void InitializeAchievementList()
     {
+
         _achievementList.makeItem = () =>
         {
             var newListEntry = GetAchievementListEntry();
 
-            var newListEntryLogic = new AchievementListEntryController();
-
-            newListEntry.userData = newListEntryLogic;
-            newListEntryLogic.SetVisualElement(newListEntry);
+            if (newListEntry.userData is not AchievementListEntryController newListEntryLogic)
+            {
+                newListEntryLogic = new AchievementListEntryController();
+                newListEntry.userData = newListEntryLogic;
+                newListEntryLogic.SetVisualElement(newListEntry);
+            }
 
             return newListEntry;
         };
 
         _achievementList.bindItem = (item, index) =>
         {
-            (item.userData as AchievementListEntryController).SetData(AchievementList[index]);
+            if (item.userData is not AchievementListEntryController newListEntryLogic)
+            {
+                newListEntryLogic = new AchievementListEntryController();
+                item.userData = newListEntryLogic;
+                newListEntryLogic.SetVisualElement(item);
+            }
+
+            newListEntryLogic.SetData(AchievementList[index]);
         };
 
         _achievementList.itemsSource = AchievementList;

@@ -122,13 +122,13 @@ public class SingleplayerUIController : MonoBehaviour
         WorldList.AddRange(SaveManager.LoadWorldDataListEntry());
     }
 
-    private readonly Queue<VisualElement> _worldListEntryPool = new();
+    private readonly Stack<VisualElement> _worldListEntryPool = new();
 
     private VisualElement GetWorldListEntry()
     {
         if (_worldListEntryPool.Count > 0)
         {
-            return _worldListEntryPool.Dequeue();
+            return _worldListEntryPool.Pop();
         }
         else
         {
@@ -136,29 +136,33 @@ public class SingleplayerUIController : MonoBehaviour
         }
     }
 
-    private void ReleaseWorldListEntry(VisualElement worldListEntry)
-    {
-        _worldListEntryPool.Enqueue(worldListEntry);
-    }
-
     void InitializeWorldList()
     {
         _worldListEntry.makeItem = () =>
         {
-            var newWorldListEntry = GetWorldListEntry();
+            var newListEntry = GetWorldListEntry();
 
-            var newWorldListEntryLogic = new WorldListEntryController();
+            if (newListEntry.userData is not WorldListEntryController newListEntryLogic)
+            {
+                newListEntryLogic = new WorldListEntryController();
+                newListEntry.userData = newListEntryLogic;
+                newListEntryLogic.SetVisualElement(newListEntry);
+            }
 
-            newWorldListEntry.userData = newWorldListEntryLogic;
-            newWorldListEntryLogic.SetVisualElement(newWorldListEntry);
-
-            return newWorldListEntry;
+            return newListEntry;
         };
 
         _worldListEntry.bindItem = (item, index) =>
         {
-            (item.userData as WorldListEntryController).SetData(WorldList[index]);
-        };
+            if (item.userData is not WorldListEntryController newListEntryLogic)
+            {
+                newListEntryLogic = new WorldListEntryController();
+                item.userData = newListEntryLogic;
+                newListEntryLogic.SetVisualElement(item);
+            }
+
+            newListEntryLogic.SetData(WorldList[index]);
+        }; 
 
         _worldListEntry.itemsSource = WorldList;
     }
