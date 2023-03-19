@@ -8,7 +8,6 @@ public class MainUIController : MonoBehaviour
     private VisualElement _root;
     private Label _versionLabel;
     private Button _singleplayerButton;
-    private Button _multiplayerButton;
     private Button _achievementButton;
     private Button _collectibleButton;
     private Button _creditButton;
@@ -30,7 +29,6 @@ public class MainUIController : MonoBehaviour
         _versionLabel.text = _versionLabel.text.Replace("%s", Application.version);
 
         _singleplayerButton = _root.Q<Button>("SingleplayerButton");
-        _multiplayerButton = _root.Q<Button>("MultiplayerButton");
         _achievementButton = _root.Q<Button>("AchievementButton");
         _collectibleButton = _root.Q<Button>("CollectibleButton");
         _creditButton = _root.Q<Button>("CreditButton");
@@ -41,7 +39,6 @@ public class MainUIController : MonoBehaviour
     private void AttachEventHandlers()
     {
         _singleplayerButton.clicked += onSingleplayerButtonClicked;
-        _multiplayerButton.clicked += onMultiplayerButtonClicked;
         _achievementButton.clicked += onAchievementButtonClicked;
         _collectibleButton.clicked += onCollectibleButtonClicked;
         _creditButton.clicked += onCreditButtonButtonClicked;
@@ -52,11 +49,6 @@ public class MainUIController : MonoBehaviour
     private async void onSingleplayerButtonClicked()
     {
         await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
-    }
-
-    private async void onMultiplayerButtonClicked()
-    {
-        await UIController.LoadSceneAsync("Multiplayer/Multiplayer");
     }
 
     private async void onAchievementButtonClicked()
