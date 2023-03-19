@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -12,7 +13,8 @@ public class SaveManager
 
     public static void CreateWorld(World world)
     {
-        string initialWorldPath = Path.Combine(SavePath, world.WorldName);
+        string escapedFileName = new (world.WorldName.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
+        string initialWorldPath = Path.Combine(SavePath, escapedFileName);
         string currentWorldPath = initialWorldPath;
         int increment = 0;
         while (Directory.Exists(currentWorldPath))

@@ -19,6 +19,11 @@ public class ThreadedDataRequester : MonoBehaviour
 
     public static void RequestData(Func<object> generateData, Action<object> callback)
     {
+        if (instance == null)
+        {
+            Debug.LogWarning("ThreadedDataRequester instance is null");
+            return;
+        }
         instance.DataThread(generateData, callback);
     }
 

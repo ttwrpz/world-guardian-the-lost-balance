@@ -44,7 +44,7 @@ public class PlacementGenerator : MonoBehaviour
 
             GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(prefab, transform);
 
-            instantiatedPrefab.transform.SetParent(transform, false);
+            instantiatedPrefab.transform.SetParent(transform);
             instantiatedPrefab.transform.position = hit.point;
             instantiatedPrefab.transform.Rotate(Vector3.up, Random.Range(rotationRange.x, rotationRange.y), Space.Self);
             instantiatedPrefab.transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.FromToRotation(instantiatedPrefab.transform.up, hit.normal), rotateTowardsNormal);
@@ -63,5 +63,6 @@ public class PlacementGenerator : MonoBehaviour
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
     }
+
 #endif
 }

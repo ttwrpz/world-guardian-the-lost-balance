@@ -23,10 +23,6 @@ public class GameplayUIController : MonoBehaviour
     private Button collectibleButton;
     private Button settingsButton;
 
-    [SerializeField]
-    private VisualTreeAsset _multiplayerPlayerInfoTemplate;
-    private GroupBox _multiplayerGroup;
-
     private GroupBox _controlGroup;
     private GroupBox _timeControlBox;
     private Label dateTimeLabel;
@@ -103,14 +99,6 @@ public class GameplayUIController : MonoBehaviour
         achievementButton = _menuGroup.Q<Button>("AchievementButton");
         collectibleButton = _menuGroup.Q<Button>("CollectibleButton");
         settingsButton = _menuGroup.Q<Button>("SettingsButton");
-
-        /*********************
-        *
-        *  Multiplayer Menu
-        *
-        *********************/
-
-        _multiplayerGroup = _root.Q<GroupBox>("MultiplayerMenu");
 
         /*********************
         *

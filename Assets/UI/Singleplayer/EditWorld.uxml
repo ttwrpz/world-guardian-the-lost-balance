@@ -10,7 +10,7 @@
             <ui:GroupBox name="GroupBox" style="flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(229, 229, 229);">
                 <ui:GroupBox name="TextFieldWithIcon" class="text-field-with-icon-wrapper">
                     <ui:VisualElement name="TextFieldIcon" class="field-icon-wrapper">
-                        <ui:VisualElement name="Icon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Graphics/GUI/singleplayer.png?fileID=121132263&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-large&apos;);" />
+                        <ui:VisualElement name="Icon" class="field-icon" style="background-image: url(&apos;project://database/Assets/Textures/GUI/singleplayer.png?fileID=121132263&amp;guid=e607195172df6644499debe937c49656&amp;type=3#world-size-large&apos;);" />
                     </ui:VisualElement>
                     <ui:TextField picking-mode="Ignore" label="World Name:" value="%s" name="worldNameInput" class="text-field-with-icon" />
                 </ui:GroupBox>
@@ -19,7 +19,7 @@
             <ui:GroupBox name="ActionButtons" class="btn-col btn-actions" style="padding-right: 3px; align-items: center;">
                 <ui:Button text="Open Save Folder" name="openSaveFolderButton" class="btn btn-lg" />
                 <ui:Button text="Make Backup" name="backupWorldButton" class="btn btn-lg" />
-                <ui:Button text="Open Backup World" name="openBackupFolderButton" class="btn btn-lg" />
+                <ui:Button text="Open Backups Folder" name="openBackupFolderButton" class="btn btn-lg" />
                 <ui:Button text="Save" name="saveButton" class="btn btn-lg" />
                 <ui:Button text="Back" name="backButton" class="btn btn-lg" />
             </ui:GroupBox>

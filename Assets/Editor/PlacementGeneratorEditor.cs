@@ -6,6 +6,8 @@ public class PlacementGeneratorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
+
         PlacementGenerator placementGenerator = (PlacementGenerator)target;
 
         if (GUILayout.Button("Generate"))
