@@ -11,6 +11,8 @@ public class MeshSettings : UpdatableData
 
     public float meshScale = 1f;
     public bool useFlatShading;
+    [Range(0.01f, 5f)]
+    public float blockiness = -.1f;
 
     [Range(0, numberSupportedChunkSizes - 1)]
     public int chunkSizeIndex;

@@ -4,18 +4,19 @@
         <ui:VisualElement name="UIWrapper" class="ui-wrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-grow: 1; min-width: auto; max-width: none; flex-direction: row; justify-content: space-between; background-color: rgba(0, 0, 0, 0);">
             <ui:VisualElement name="MenuWrapper" class="ui-wrapper" style="background-color: rgba(0, 0, 0, 0);">
                 <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: center;">
-                    <ui:VisualElement name="GameLogo" style="background-color: rgba(0, 0, 0, 0);">
-                        <ui:Label tabindex="-1" text="World&apos;s Guardian: The Lost Balance" display-tooltip-when-elided="true" name="Label" style="color: rgb(229, 229, 229); -unity-text-align: upper-center; font-size: 20px; -unity-font-style: bold; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 20px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                    <ui:VisualElement name="GameLogo" style="color: rgb(229, 229, 229); -unity-font-style: bold; margin-bottom: 5%; -unity-text-align: middle-center;">
+                        <ui:Label tabindex="-1" text="World&apos;s Guardian" display-tooltip-when-elided="true" name="Title" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 50%;" />
+                        <ui:Label tabindex="-1" text="The Lost Balance" display-tooltip-when-elided="true" name="Subtitle" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 20%;" />
                     </ui:VisualElement>
-                    <ui:GroupBox name="MenuButtons" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; max-width: 60%; width: 100%;">
-                        <ui:Button text="Singleplayer" display-tooltip-when-elided="true" name="SingleplayerButton" class="btn" />
-                        <ui:Button text="Achievements" display-tooltip-when-elided="true" name="AchievementButton" class="btn" />
-                        <ui:Button text="Collectibles" display-tooltip-when-elided="true" name="CollectibleButton" class="btn" />
+                    <ui:GroupBox name="MenuButtons" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; max-width: 50%; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; align-items: stretch; width: 100%; flex-shrink: 1;">
+                        <ui:Button text="Singleplayer" display-tooltip-when-elided="true" name="SingleplayerButton" class="btn btn-lg" />
+                        <ui:Button text="Achievements" display-tooltip-when-elided="true" name="AchievementButton" class="btn btn-lg" />
+                        <ui:Button text="Collectibles" display-tooltip-when-elided="true" name="CollectibleButton" class="btn btn-lg" />
                         <ui:GroupBox class="btn-row" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
                             <ui:Button text="Credits" display-tooltip-when-elided="true" name="CreditButton" class="btn" />
                             <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingButton" class="btn" />
                         </ui:GroupBox>
-                        <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" class="btn" />
+                        <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" class="btn btn-lg" />
                     </ui:GroupBox>
                 </ui:GroupBox>
             </ui:VisualElement>

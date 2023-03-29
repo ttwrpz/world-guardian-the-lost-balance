@@ -1,3 +1,79 @@
-.placeholder {
-    background-color: rgba(0, 0, 0, 0.4);
+.human .unity-progress-bar__progress {
+    background-color: rgba(224, 148, 98, 0.99);
+}
+
+.skill .unity-progress-bar__progress {
+    background-color: rgb(50, 166, 233);
+}
+
+.animals .unity-progress-bar__progress {
+    background-color: rgb(185, 118, 18);
+}
+
+.factory .unity-progress-bar__progress {
+    background-color: rgb(81, 81, 81);
+}
+
+.crops .unity-progress-bar__progress {
+    background-color: rgb(255, 189, 40);
+}
+
+.ghg .unity-progress-bar__progress {
+    background-color: rgba(192, 6, 6, 0.73);
+}
+
+.temp .unity-progress-bar__progress {
+    background-color: rgb(69, 89, 219);
+}
+
+.forest .unity-progress-bar__progress {
+    background-color: rgb(10, 125, 17);
+}
+
+ProgressBar.status {
+    height: 15px;
+}
+
+ProgressBar.status #unity-progress-bar {
+    min-height: 15px;
+}
+
+ProgressBar.status .unity-progress-bar__progress {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+ProgressBar.status .unity-progress-bar__title {
+    font-size: 90%;
+    -unity-text-align: middle-left;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.skillcard--active {
+    -unity-background-image-tint-color: rgb(109, 248, 113);
+}
+
+.btn {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn-active {
+    -unity-background-image-tint-color: rgb(106, 106, 106);
+    background-color: rgba(188, 188, 188, 0.47);
 }

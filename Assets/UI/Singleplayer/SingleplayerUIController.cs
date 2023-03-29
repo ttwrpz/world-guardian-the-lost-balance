@@ -87,7 +87,7 @@ public class SingleplayerUIController : MonoBehaviour
         if (!_playWorldButton.enabledSelf)
             return;
 
-        await UIController.LoadSceneAsync("Gameplay/Gameplay");
+        await UIManager.LoadSceneAsync("Gameplay/Gameplay");
     }
 
     private async void onEditWorldButtonClicked()
@@ -95,7 +95,7 @@ public class SingleplayerUIController : MonoBehaviour
         if (!_editWorldButton.enabledSelf)
             return;
         
-        await UIController.LoadSceneAsync("Singleplayer/EditWorld");
+        await UIManager.LoadSceneAsync("Singleplayer/EditWorld");
     }
 
     private async void onDeleteWorldButtonClicked()
@@ -103,17 +103,17 @@ public class SingleplayerUIController : MonoBehaviour
         if (!_deleteWorldButton.enabledSelf)
             return;
 
-        await UIController.LoadSceneAsync("Singleplayer/DeleteWorld");
+        await UIManager.LoadSceneAsync("Singleplayer/DeleteWorld");
     }
 
     private async void onCreateWorldButtonClicked()
     {
-        await UIController.LoadSceneAsync("Singleplayer/CreateWorld");
+        await UIManager.LoadSceneAsync("Singleplayer/CreateWorld");
     }
 
     private void onBackButtonClicked()
     {
-        UIController.BackToMainUI();
+        UIManager.BackToMainMenuUI();
     }
 
     void EnumerateAllWorlds()

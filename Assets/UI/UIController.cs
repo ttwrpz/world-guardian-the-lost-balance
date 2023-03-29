@@ -2,23 +2,24 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
-public class UIController : MonoBehaviour
+public abstract class UIController : MonoBehaviour
 {
-    public static async Task LoadSceneAsync(string path)
+    protected UIDocument _doc;
+    protected VisualElement _root;
+
+    protected virtual void OnEnable()
     {
-        try
-        {
-            await SceneManager.LoadSceneAsync($"Assets/Scenes/{path}.unity");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"An error occurred while trying to load the gameplay scene: {ex.Message}");
-        }
+        _doc = GetComponent<UIDocument>();
+        _root = _doc.rootVisualElement;
+
+        GetUIElements();
+        AttachEventHandlers();
     }
 
-    public static async void BackToMainUI()
-    {
-        await LoadSceneAsync("Main/Main");
-    }
+    protected abstract void GetUIElements();
+
+    protected abstract void AttachEventHandlers();
+
 }

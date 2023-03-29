@@ -13,7 +13,7 @@ public class ThreadedDataRequester : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        instance = FindFirstObjectByType<ThreadedDataRequester>();
         threadPool = new CustomThreadPool(maxThreads);
     }
 

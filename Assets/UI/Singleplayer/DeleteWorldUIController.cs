@@ -50,11 +50,11 @@ public class DeleteWorldUIController : MonoBehaviour
             WorldFolder = worldData.WorldFolder
         };
         SaveManager.DeleteWorld(world);
-        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
+        await UIManager.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
     private async void onBackButtonClicked()
     {
-        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
+        await UIManager.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 }

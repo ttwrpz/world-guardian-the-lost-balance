@@ -62,7 +62,7 @@ public class SettingUIController : MonoBehaviour
 
     private void AttachEventHandlers()
     {
-        _backButton.clicked += UIController.BackToMainUI;
+        _backButton.clicked += UIManager.BackToMainMenuUI;
 
         masterVolumeSlider.RegisterValueChangedCallback(evt => AudioManager.Instance.SetMasterVolume(evt.newValue));
         sfxSlider.RegisterValueChangedCallback(evt => AudioManager.Instance.SetSfxVolume(evt.newValue));

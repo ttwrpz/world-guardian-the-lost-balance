@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class CreateWorldUIController : MonoBehaviour
+public class CreateWorldUIController : UIController
 {
     private SpriteAtlasManager spriteAtlasManager;
 
-    private UIDocument _doc;
-    private VisualElement _root;
     private TextField _worldNameInput;
     private TextField _worldSeedInput;
     private VisualElement _worldGameModeIcon;
@@ -22,7 +20,7 @@ public class CreateWorldUIController : MonoBehaviour
     [SerializeField]
     private WorldData worldData;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         spriteAtlasManager = new("GUI/singleplayer");
 
@@ -30,7 +28,7 @@ public class CreateWorldUIController : MonoBehaviour
         AttachEventHandlers();
     }
 
-    private void GetUIElements()
+    protected override void GetUIElements()
     {
         _doc = GetComponent<UIDocument>();
         _root = _doc.rootVisualElement;
@@ -48,7 +46,7 @@ public class CreateWorldUIController : MonoBehaviour
         _backButton = _root.Q<Button>("backButton");
     }
 
-    private void AttachEventHandlers()
+    protected override void AttachEventHandlers()
     {
         _worldNameInput.RegisterCallback<ChangeEvent<string>>(onWorldNameInputChanged);
         _worldNameInput.Focus();
@@ -110,23 +108,25 @@ public class CreateWorldUIController : MonoBehaviour
         World world = new()
         {
             WorldName = _worldNameInput.text,
-            WorldSeed = World.ConvertFormat(_worldSeedInput.text),
+            WorldSeed = (_worldSeedInput.text != null)
+            ? World.ConvertSeedFormat(_worldSeedInput.text)
+            : World.GenerateRandomSeed(),
             WorldGameMode = (World.GameMode)_worldGameModeRadioInput.value,
             WorldDifficulty = (World.Difficulty)_worldDifficultyRadioInput.value,
             WorldCreatedAt = DateTime.Now
         };
 
         SaveManager.CreateWorld(world);
-        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
+        await UIManager.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
     private async void onBackButtonClicked()
     {
         if (SaveManager.LoadWorldListEntry().Count() > 0)
         {
-            await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
+            await UIManager.LoadSceneAsync("Singleplayer/Singleplayer");
             return;
         }
-        UIController.BackToMainUI();
+        UIManager.BackToMainMenuUI();
     }
 }

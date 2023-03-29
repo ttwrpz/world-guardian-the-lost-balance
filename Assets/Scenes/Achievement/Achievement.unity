@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4204304f3db06684e943cc843b7dbcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _achievementManager: {fileID: 1282382848}
   AchievementListEntryTemplate: {fileID: 9197481963319205126, guid: 6e4006685ad8a6c45946f23408de4aae, type: 3}
 --- !u!114 &657245691
 MonoBehaviour:

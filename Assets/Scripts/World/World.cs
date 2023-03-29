@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 
 [Serializable]
 public class World
 {
     public string WorldName { get; set; }
-    public string WorldSeed { get; set; }
+    public int WorldSeed { get; set; }
 
     public enum GameMode { Story, Sandbox };
     public GameMode WorldGameMode { get; set; }
@@ -17,13 +18,13 @@ public class World
     public DateTime WorldCreatedAt { get; set; }
     public DateTime WorldModifiedAt { get; set; }
 
-    public static string GenerateRandomSeed()
+    public static int GenerateRandomSeed()
     {
-        return "";
+        return UnityEngine.Random.Range(-10000, 10000);
     }
 
-    public static string ConvertFormat(string seed)
+    public static int ConvertSeedFormat(string seed)
     {
-        return seed;
+        return seed.Select(c => (int)c).Sum() % 20001 - 10000;
     }
 }

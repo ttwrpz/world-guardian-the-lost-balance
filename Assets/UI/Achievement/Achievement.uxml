@@ -5,9 +5,9 @@
             <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
                 <ui:Label text="Achievements" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
                 <ui:Label text="You have Unlocked &lt;b&gt;%1&lt;/b&gt; of &lt;b&gt;%2&lt;/b&gt;" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
-                <ui:ProgressBar title="Unlocked All Achievement" name="achievementProgressBar" value="0" class="progress-bar" />
+                <ui:ProgressBar name="achievementProgressBar" value="0" class="progress-bar" />
             </ui:GroupBox>
-            <ui:ListView name="achievementList" virtualization-method="DynamicHeight" selection-type="None" show-bound-collection-size="true" picking-mode="Ignore" style="height: 100%; margin-top: 8px;" />
+            <ui:ListView name="achievementList" virtualization-method="DynamicHeight" selection-type="None" show-bound-collection-size="true" picking-mode="Ignore" style="height: 100%; margin-top: 8px; flex-grow: 1;" />
             <ui:GroupBox name="ActionButtons" class="btn-row btn-actions">
                 <ui:Button text="Back" display-tooltip-when-elided="true" name="backButton" class="btn btn-lg" />
             </ui:GroupBox>

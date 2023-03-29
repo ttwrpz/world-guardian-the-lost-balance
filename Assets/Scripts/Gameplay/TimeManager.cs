@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -12,20 +11,12 @@ public class TimeManager : MonoBehaviour
 
     private float elapsedTime = 0;
 
+    public event Action MonthElapsed;
+    public event Action YearElapsed;
+
     void Update()
     {
-        elapsedTime += Time.deltaTime * timeScale;
-
-        if (elapsedTime >= realTimeToYear)
-        {
-            elapsedTime = 0;
-            inGameYear++;
-            inGameMonth = 1;
-        }
-        else
-        {
-            inGameMonth = Mathf.Clamp(Mathf.CeilToInt((elapsedTime / realTimeToYear) * 12), 1, 12);
-        }
+        AdvanceTime(Time.deltaTime);
     }
 
     public void PauseTime()
@@ -47,4 +38,28 @@ public class TimeManager : MonoBehaviour
     {
         timeScale = 3;
     }
+
+    public void AdvanceTime(float delta)
+    {
+        float realTimePerMonth = realTimeToYear / 12f;
+        elapsedTime += delta * timeScale;
+
+        if (elapsedTime >= realTimePerMonth)
+        {
+            int elapsedMonths = Mathf.FloorToInt(elapsedTime / realTimePerMonth);
+            elapsedTime -= elapsedMonths * realTimePerMonth;
+
+            inGameMonth += elapsedMonths;
+            if (inGameMonth > 12)
+            {
+                inGameYear += inGameMonth / 12;
+                inGameMonth %= 12;
+
+                YearElapsed?.Invoke();
+            }
+
+            MonthElapsed?.Invoke();
+        }
+    }
+
 }

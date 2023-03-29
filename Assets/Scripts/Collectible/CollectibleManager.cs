@@ -42,7 +42,7 @@ public class CollectibleManager : MonoBehaviour
 
     public List<Collectible> LoadCollectiblesByType(Collectible.CollectibleType type)
     {
-        return new List<Collectible>(Resources.LoadAll<Collectible>($"Collectibles/{type}"));
+        return new List<Collectible>(Resources.LoadAll<Collectible>($"GameData/Collectibles/{type}"));
     }
 
     public int GetCollectedCountByType(Collectible.CollectibleType type)

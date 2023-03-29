@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static Collectible;
 
-public class AchievementUIController : MonoBehaviour
+public class AchievementUIController : UIController
 {
-    private UIDocument _doc;
-    private VisualElement _root;
+    [SerializeField]
+    private AchievementManager _achievementManager;
+
     private Label _subtitleScreenLabel;
     private ProgressBar _achievementProgressBar;
     private ListView _achievementList;
@@ -19,33 +20,19 @@ public class AchievementUIController : MonoBehaviour
     List<Achievement> AchievementList;
     List<Achievement> UnlockedAchievementList;
 
-    private AchievementManager _achievementManager;
-
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        _achievementManager = FindFirstObjectByType<AchievementManager>();
-        if (_achievementManager == null)
-        {
-            Debug.LogError("AchievementManager not found in the scene.");
-            return;
-        }
+        _achievementManager.LoadSavedAchievements();
+        _achievementManager.LoadAchievementsFromResources();
 
-        GetUIElements();
-        StartCoroutine(EnumerateAndInitialize());
-    }
-    private IEnumerator EnumerateAndInitialize()
-    {
-        yield return StartCoroutine(EnumerateAllAchievements());
-        UpdateUIElements();
-        AttachEventHandlers();
+        base.OnEnable();
+
+        EnumerateAllAchievements();
         InitializeAchievementList();
     }
 
-    private void GetUIElements()
+    protected override void GetUIElements()
     {
-        _doc = GetComponent<UIDocument>();
-        _root = _doc.rootVisualElement;
-
         _achievementList = _root.Q<ListView>("achievementList");
 
         _subtitleScreenLabel = _root.Q<Label>("subtitleScreenLabel");
@@ -64,31 +51,23 @@ public class AchievementUIController : MonoBehaviour
         _achievementProgressBar.value = CalculateProgressPercentage();
     }
 
-    private void AttachEventHandlers()
+    protected override void AttachEventHandlers()
     {
         _backButton.clicked += onBackButtonClicked;
     }
 
     private float CalculateProgressPercentage()
     {
-        int collectedCount = AchievementList.Count();
-        int totalCount = UnlockedAchievementList.Count();
-
-        if (totalCount == 0)
-            return 0f;
-
-        return ((float)collectedCount / totalCount) * 100f;
+        return (float)UnlockedAchievementList.Count() / AchievementList.Count() * 100f;
     }
 
     private void onBackButtonClicked()
     {
-        UIController.BackToMainUI();
+        UIManager.BackToMainMenuUI();
     }
 
-    IEnumerator EnumerateAllAchievements()
+    void EnumerateAllAchievements()
     {
-        yield return new WaitUntil(() => _achievementManager.IsLoaded);
-
         AchievementList = _achievementManager.GetAchievements();
         UnlockedAchievementList = _achievementManager.GetUnlockedAchievements();
     }
@@ -137,5 +116,7 @@ public class AchievementUIController : MonoBehaviour
         };
 
         _achievementList.itemsSource = AchievementList;
+
+        UpdateUIElements();
     }
 }

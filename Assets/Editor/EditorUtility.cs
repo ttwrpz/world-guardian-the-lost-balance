@@ -49,7 +49,7 @@ public class EditorUtility : Editor
         }
     }
 
-    [MenuItem("World's Guadian/Scripts Helper/Find Missing Scripts In Scene")]
+    [MenuItem("Project Utility/Scripts Helper/Find Missing Scripts In Scene")]
 
     static void FindMissingScriptsInSceneMenuItem()
     {

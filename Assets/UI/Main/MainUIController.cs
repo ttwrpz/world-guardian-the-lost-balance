@@ -48,27 +48,27 @@ public class MainUIController : MonoBehaviour
 
     private async void onSingleplayerButtonClicked()
     {
-        await UIController.LoadSceneAsync("Singleplayer/Singleplayer");
+        await UIManager.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 
     private async void onAchievementButtonClicked()
     {
-        await UIController.LoadSceneAsync("Achievement/Achievement");
+        await UIManager.LoadSceneAsync("Achievement/Achievement");
     }
 
     private async void onCollectibleButtonClicked()
     {
-        await UIController.LoadSceneAsync("Collectible/Collectible");
+        await UIManager.LoadSceneAsync("Collectible/Collectible");
     }
 
     private async void onCreditButtonButtonClicked()
     {
-        await UIController.LoadSceneAsync("Main/Credit");
+        await UIManager.LoadSceneAsync("Main/Credit");
     }
 
     private async void onSettingButtonButtonClicked()
     {
-        await UIController.LoadSceneAsync("Setting/Setting");
+        await UIManager.LoadSceneAsync("Setting/Setting");
     }
 
     private void onQuitButtonClicked()

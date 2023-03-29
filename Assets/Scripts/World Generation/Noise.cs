@@ -73,7 +73,7 @@ public static class Noise
         for (int i = 0; i < settings.octaves; i++)
         {
             maxPossibleHeight += amplitude;
-            amplitude *= settings.persistance;
+            amplitude *= settings.persistence;
         }
 
         return maxPossibleHeight;
@@ -93,7 +93,7 @@ public static class Noise
             float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
             noiseHeight += perlinValue * amplitude;
 
-            amplitude *= settings.persistance;
+            amplitude *= settings.persistence;
             frequency *= settings.lacunarity;
         }
 
@@ -121,7 +121,7 @@ public class NoiseSettings
 
     public int octaves = 6;
     [Range(0, 1)]
-    public float persistance = .6f;
+    public float persistence = .6f;
     public float lacunarity = 2;
 
     public int seed;
@@ -132,6 +132,6 @@ public class NoiseSettings
         scale = Mathf.Max(scale, 0.01f);
         octaves = Mathf.Max(octaves, 1);
         lacunarity = Mathf.Max(lacunarity, 1);
-        persistance = Mathf.Clamp01(persistance);
+        persistence = Mathf.Clamp01(persistence);
     }
 }

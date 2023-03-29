@@ -22,7 +22,7 @@ public class CollectibleUIController : MonoBehaviour
         _collectibleManager = FindFirstObjectByType<CollectibleManager>();
         if (_collectibleManager == null)
         {
-            Debug.LogError("AchievementManager not found in the scene.");
+            Debug.LogError("CollectibleManager not found in the scene.");
             return;
         }
 
@@ -70,6 +70,6 @@ public class CollectibleUIController : MonoBehaviour
         _itemButton.clicked += CollectibleUIEventHandlers.onItemButtonClicked;
         _landmarkButton.clicked += CollectibleUIEventHandlers.onLandmarkButtonClicked;
         _loreButton.clicked += CollectibleUIEventHandlers.onLoreButtonClicked;
-        _backButton.clicked += UIController.BackToMainUI;
+        _backButton.clicked += UIManager.BackToMainMenuUI;
     }
 }

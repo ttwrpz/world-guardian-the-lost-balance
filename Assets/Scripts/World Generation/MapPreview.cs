@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapPreview : MonoBehaviour
@@ -30,7 +28,7 @@ public class MapPreview : MonoBehaviour
         textureData.ApplyToMaterial(terrainMaterial);
         textureData.UpdateMeshHeights(terrainMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
 
-        HeightMap heightMap = HeightMapGenerator.GenerateHeightMap(meshSettings.numberVerticlesPerLine, meshSettings.numberVerticlesPerLine, heightMapSettings, Vector2.zero);
+        HeightMap heightMap = HeightMapGenerator.GenerateHeightMap(meshSettings.numberVerticlesPerLine, meshSettings.numberVerticlesPerLine, heightMapSettings, Vector2.zero, Vector2.zero, meshSettings);
 
         MapPreview display = FindAnyObjectByType<MapPreview>();
         switch (drawMode)
@@ -42,7 +40,18 @@ public class MapPreview : MonoBehaviour
                 display.DrawMesh(MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
                 break;
             case DrawMode.FalloffMap:
-                display.DrawTexture(TextureGenerator.TextureFromHeightMap(new HeightMap(FalloffGenerator.GenerateFalloffMap(meshSettings.numberVerticlesPerLine), 0, 1)));
+
+                float[,] falloffMap;
+                if (heightMapSettings.falloffType == FalloffType.FixedSize)
+                {
+                    falloffMap = FalloffGenerator.GenerateFixedSizeFalloffMap(meshSettings.numberVerticlesPerLine, meshSettings.numberVerticlesPerLine, heightMapSettings, Vector2.zero, meshSettings);
+                }
+                else
+                {
+                    falloffMap = FalloffGenerator.GenerateFalloffMap(meshSettings.numberVerticlesPerLine, heightMapSettings);
+                }
+
+                display.DrawTexture(TextureGenerator.TextureFromHeightMap(new HeightMap(falloffMap, 0, 1)));
                 break;
         }
     }

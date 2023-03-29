@@ -15,7 +15,7 @@ public class WorldData : ScriptableObject
     public void ClearData()
     {
         WorldName = "";
-        WorldSeed = "";
+        WorldSeed = 0;
         WorldGameMode = 0;
         WorldDifficulty = 0;
         WorldFolder = "";
@@ -31,9 +31,9 @@ public class WorldData : ScriptableObject
     }
 
     [SerializeField]
-    private string _worldSeed;
+    private int _worldSeed;
 
-    public string WorldSeed
+    public int WorldSeed
     {
         get { return _worldSeed; }
         set { _worldSeed = value; }

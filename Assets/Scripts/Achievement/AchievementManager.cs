@@ -1,21 +1,19 @@
-using UnityEngine;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
-    public bool IsLoaded { get; private set; }
-
     public List<Achievement> achievements;
     private string achievementsSavePath;
 
     private void Awake()
     {
         achievementsSavePath = Path.Combine(Application.persistentDataPath, "achievements.json");
-
-        LoadAchievementsFromResources();
+        CreateSaveFileIfNotExists();
         LoadSavedAchievements();
+        LoadAchievementsFromResources();
     }
 
     public void CreateSaveFileIfNotExists()
@@ -27,30 +25,42 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    private void LoadAchievementsFromResources()
+    public void LoadAchievementsFromResources()
     {
-        achievements.AddRange(Resources.LoadAll<Achievement>("Achievements"));
+        Achievement[] resourcesAchievements = Resources.LoadAll<Achievement>("GameData/Achievements");
+
+        if (resourcesAchievements.Length > 0)
+        {
+            foreach (Achievement resourceAchievement in resourcesAchievements)
+            {
+                if (!achievements.Exists(a => a.id == resourceAchievement.id))
+                {
+                    achievements.Add(resourceAchievement);
+                }
+            }
+        }
     }
 
-    private void LoadSavedAchievements()
+    public void LoadSavedAchievements()
     {
         if (File.Exists(achievementsSavePath))
         {
             string savedAchievementsJson = File.ReadAllText(achievementsSavePath);
             Achievement[] savedAchievements = JsonUtility.FromJson<Achievement[]>(savedAchievementsJson);
 
-            foreach (Achievement savedAchievement in savedAchievements)
+            if (savedAchievements.Length > 0)
             {
-                Achievement achievement = GetAchievementByID(savedAchievement.id);
-                if (achievement != null)
+                foreach (Achievement savedAchievement in savedAchievements)
                 {
-                    achievement.isUnlocked = savedAchievement.isUnlocked;
-                    achievement.unlockedDate = savedAchievement.unlockedDate;
+                    Achievement achievement = GetAchievementByID(savedAchievement.id);
+                    if (achievement != null)
+                    {
+                        achievement.isUnlocked = savedAchievement.isUnlocked;
+                        achievement.unlockedDate = savedAchievement.unlockedDate;
+                    }
                 }
             }
         }
-
-        IsLoaded = true;
     }
 
     public void SaveAchievements()
@@ -71,7 +81,6 @@ public class AchievementManager : MonoBehaviour
             Debug.LogWarning("No achievements found. Make sure they are loaded correctly.");
             return new List<Achievement>();
         }
-
         return achievements.Where(a => a.isUnlocked).ToList();
     }
 

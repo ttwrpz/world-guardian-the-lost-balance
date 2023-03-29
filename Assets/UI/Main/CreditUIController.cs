@@ -19,11 +19,11 @@ public class CreditUIController : MonoBehaviour
         _root = _doc.rootVisualElement;
 
         _backButton = _root.Q<Button>("BackButton");
-        _backButton.clicked += UIController.BackToMainUI;
+        _backButton.clicked += UIManager.BackToMainMenuUI;
     }
 
     private void AttachEventHandlers()
     {
-        _backButton.clicked += UIController.BackToMainUI;
+        _backButton.clicked += UIManager.BackToMainMenuUI;
     }
 }

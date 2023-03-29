@@ -12,6 +12,7 @@ public static class MeshGenerator
         Vector2 topLeft = new Vector2(-1, 1) * meshSettings.meshWorldSize / 2f;
 
         MeshData meshData = new(numberVecticlesPerLine, skipIncrement, meshSettings.useFlatShading);
+        if (meshSettings.blockiness == 0) { meshSettings.blockiness = -.1f; }
 
         int[,] vertexIndicesMap = new int[numberVecticlesPerLine, numberVecticlesPerLine];
         int meshVertexIndex = 0;
@@ -36,6 +37,7 @@ public static class MeshGenerator
                         meshVertexIndex++;
                     }
                 }
+
             }
         }
 
@@ -58,7 +60,8 @@ public static class MeshGenerator
                     Vector2 percent = new Vector2(x - 1, y - 1) / (numberVecticlesPerLine - 3);
                     Vector2 vertexPosition2D = topLeft + new Vector2(percent.x, -percent.y) * meshSettings.meshWorldSize;
 
-                    float height = heightMap[x, y];
+                    //float height = heightMap[x, y];
+                    float height = SnapHeight(heightMap[x, y], meshSettings.blockiness);
 
                     if (isEdgeConnectionVertex)
                     {
@@ -105,6 +108,11 @@ public static class MeshGenerator
         meshData.ProcessMesh();
 
         return meshData;
+    }
+
+    private static float SnapHeight(float height, float blockiness)
+    {
+        return Mathf.Round(height * blockiness) / blockiness;
     }
 
     public struct Coord

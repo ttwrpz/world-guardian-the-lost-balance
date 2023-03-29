@@ -60,7 +60,7 @@
 
 .screen-bg {
     flex-grow: 1;
-    background-image: url('project://database/Assets/Graphics/GUI/Background.png?fileID=2800000&guid=2162e630600374a4a8bb6c8e3a1c597f&type=3#Background');
+    background-image: url('project://database/Assets/Art%20Assets/Background.png?fileID=2800000&guid=2162e630600374a4a8bb6c8e3a1c597f&type=3#Background');
     -unity-background-image-tint-color: rgb(153, 153, 153);
     background-color: rgba(68, 77, 77, 0);
     -unity-background-scale-mode: scale-and-crop;
@@ -95,7 +95,7 @@
     padding-bottom: 0;
     flex-grow: 1;
     max-width: 75%;
-    -unity-font-definition: url('project://database/Assets/Graphics/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&guid=2fc062e308e3b914cbdf2e8e954886c4&type=3#RD CHULAJARUEK');
+    -unity-font-definition: url('project://database/Assets/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&guid=2fc062e308e3b914cbdf2e8e954886c4&type=3#RD CHULAJARUEK');
     background-color: rgba(51, 51, 51, 0.2);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
