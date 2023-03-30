@@ -114,14 +114,14 @@ Material:
     - _Depth: 0.2
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Displacement: 4
+    - _Displacement: 4.83
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Foam_Amount: 8.09
+    - _Foam_Amount: 2.14
     - _Foam_Color: 0
-    - _Foam_Cutoff: 3.42
-    - _Foam_Scale: 100
+    - _Foam_Cutoff: 3.91
+    - _Foam_Scale: 56.22
     - _Foam_Speed: 0.34
     - _GlossMapScale: 0
     - _Glossiness: 0

@@ -211,7 +211,7 @@ public class GameplayUIController : UIController
         pauseMenuBackToMainMenu.RegisterCallback<ClickEvent>(evt =>
         {
             SaveManager.SaveWorldData(gameManager.worldData.ConvertToWorld());
-            SaveManager.SaveWorld(gameManager.worldData.ConvertToWorld(), gameManager.worldSave);
+            SaveManager.SaveWorldPlayerData(gameManager.worldData.ConvertToWorld(), gameManager.worldSave);
             UIManager.BackToMainMenuUI();
         });
 
@@ -235,7 +235,7 @@ public class GameplayUIController : UIController
         pauseMenuElement.style.display = DisplayStyle.Flex;
 
         SaveManager.SaveWorldData(gameManager.worldData.ConvertToWorld());
-        SaveManager.SaveWorld(gameManager.worldData.ConvertToWorld(), gameManager.worldSave);
+        SaveManager.SaveWorldPlayerData(gameManager.worldData.ConvertToWorld(), gameManager.worldSave);
     }
 
     private void ChangeTimeState(TimeState state)

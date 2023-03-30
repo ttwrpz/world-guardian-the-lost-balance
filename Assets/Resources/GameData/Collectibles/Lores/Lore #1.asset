@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714562a090b3b2946ab148301594c375, type: 3}
+  m_Name: Lore #1
+  m_EditorClassIdentifier: 
+  id: lore_1
+  type: 3
+  icon: {fileID: 21300000, guid: 3734d247ddebb2b4f9a8d058cd40345c, type: 3}
+  collectibleName: Lore #1
+  description: Humans had reached the height of their civilization, but their advancements
+    also led to their downfall. The catastrophic event that destroyed their civilization
+    is still a mystery, but it left the world barren and inhospitable, forcing the
+    last of humanity to seek refuge in underground bunkers.
+  isCollected: 0

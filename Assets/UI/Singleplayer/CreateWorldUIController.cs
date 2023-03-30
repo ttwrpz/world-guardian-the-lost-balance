@@ -116,7 +116,16 @@ public class CreateWorldUIController : UIController
             WorldCreatedAt = DateTime.Now
         };
 
-        SaveManager.CreateWorld(world);
+        WorldPlayerData playerData = new()
+        {
+            ElapsedTime = 0f,
+            SkillPoints = 0
+        };
+
+        string worldFolder = SaveManager.CreateWorld(world);
+        world.WorldFolder = worldFolder;
+        SaveManager.SaveWorldPlayerData(world, playerData);
+
         await UIManager.LoadSceneAsync("Singleplayer/Singleplayer");
     }
 

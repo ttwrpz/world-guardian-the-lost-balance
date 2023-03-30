@@ -24,8 +24,6 @@ public class TerrainGenerator : MonoBehaviour
     Dictionary<Vector2, TerrainChunk> terrianChunkDictionary = new();
     List<TerrainChunk> visibleTerrainChunks = new();
 
-    public event System.Action<TerrainChunk, bool> OnVisibilityChanged;
-
     private void Start()
     {
         textureSettings.ApplyToMaterial(terrainMaterial);

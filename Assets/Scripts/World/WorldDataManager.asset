@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f382bf60e81e984b874ea5b9710e2d2, type: 3}
   m_Name: WorldDataManager
   m_EditorClassIdentifier: 
-  _worldName: 
-  _worldSeed: 
+  _worldName: New World
+  _worldSeed: 0
   _worldGameMode: 0
   _worldDifficulty: 0
-  _worldSize: 0
+  _worldFolder: 

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714562a090b3b2946ab148301594c375, type: 3}
+  m_Name: Lore #7
+  m_EditorClassIdentifier: 
+  id: lore_7
+  type: 3
+  icon: {fileID: 21300000, guid: 3734d247ddebb2b4f9a8d058cd40345c, type: 3}
+  collectibleName: Lore #7
+  description: The human action that occurs during the tutorial phase of the game
+    is a reminder that the player's ultimate goal is to save humanity. They must
+    use their powers and knowledge to prevent the catastrophic event that destroyed
+    civilization, ensuring a brighter future for the survivors and their descendants.
+  isCollected: 0

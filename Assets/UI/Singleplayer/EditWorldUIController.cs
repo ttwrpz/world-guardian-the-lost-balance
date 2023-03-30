@@ -84,6 +84,7 @@ public class EditWorldUIController : MonoBehaviour
             WorldFolder = worldData.WorldFolder,
         };
         string backupName = SaveManager.BackupWorld(world);
+        _worldFolderLabel.text = $"Your world was saved under {backupName}";
         //Show Toast UI
     }
 

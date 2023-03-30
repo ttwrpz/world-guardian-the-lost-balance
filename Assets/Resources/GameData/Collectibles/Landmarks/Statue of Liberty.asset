@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714562a090b3b2946ab148301594c375, type: 3}
   m_Name: Statue of Liberty
   m_EditorClassIdentifier: 
-  id: 
+  id: statue_of_liberty
   type: 2
   icon: {fileID: 0}
   collectibleName: Statue of Liberty

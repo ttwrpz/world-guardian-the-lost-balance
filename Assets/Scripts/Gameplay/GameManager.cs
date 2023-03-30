@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private Camera miniMapCamera;
 
     public WorldData worldData;
-    public WorldSave worldSave;
+    public WorldPlayerData worldSave;
     
     [SerializeField]
     private TerrainGenerator terrainGenerator;

@@ -15,7 +15,7 @@ public class SaveManager
     public static readonly string SavePath = Path.Combine(Application.persistentDataPath, "saves");
     public static readonly string BackupPath = Path.Combine(Application.persistentDataPath, "backups");
 
-    public static void CreateWorld(World world)
+    public static string CreateWorld(World world)
     {
         string escapedFileName = new(world.WorldName.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
         string initialWorldPath = Path.Combine(SavePath, escapedFileName);
@@ -31,6 +31,8 @@ public class SaveManager
         BinaryFormatter formatter = new();
         using FileStream fileStream = new(Path.Combine(currentWorldPath, "level.dat"), FileMode.Create);
         formatter.Serialize(fileStream, world);
+
+        return currentWorldPath;
     }
 
     public static string[] LoadWorldListEntry()
@@ -118,41 +120,61 @@ public class SaveManager
         fileStream.Flush();
     }
 
-    private static void CreateWorldSave(World world, WorldSave worldSave)
+    public static void SaveWorldPlayerData(World world, WorldPlayerData worldSave)
     {
         BinaryFormatter formatter = new();
-        using FileStream fileStream = new(Path.Combine(world.WorldFolder, "save.dat"), FileMode.Create);
+        using FileStream fileStream = new(Path.Combine(world.WorldFolder, "playerdata.dat"), FileMode.Create);
         formatter.Serialize(fileStream, worldSave);
     }
 
-    public static WorldSave LoadWorldSave(World world)
+    public static WorldPlayerData LoadWorldPlayerData(World world)
     {
-        string _saveFile = Path.Combine(SavePath, world.WorldFolder, "save.dat");
+        string _saveFile = Path.Combine(SavePath, world.WorldFolder, "playerdata.dat");
 
         BinaryFormatter formatter = new();
         using FileStream fileStream = new(_saveFile, FileMode.Open);
 
-        return (WorldSave)formatter.Deserialize(fileStream);
+        return (WorldPlayerData)formatter.Deserialize(fileStream);
     }
 
-    public static void SaveWorld(World world, WorldSave worldSave)
+    public void SaveEnvironmentObjects(World world)
     {
-        string _saveFile = Path.Combine(SavePath, world.WorldFolder, "save.dat");
+        string savePath = Path.Combine(SavePath, world.WorldFolder, "environment.dat");
 
-        if (!File.Exists(_saveFile))
+        List<GameObject> objectsToSave = new List<GameObject>();
+
+        GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject obj in rootObjects)
         {
-            CreateWorldSave(world, worldSave);
+            if (obj.GetComponent<City>() != null || obj.CompareTag("Environment"))
+            {
+                objectsToSave.Add(obj);
+            }
         }
 
-        BinaryFormatter formatter = new();
-        using FileStream fileStream = new(_saveFile, FileMode.Open);
+        BinaryFormatter formatter = new BinaryFormatter();
 
-        WorldSave save = (WorldSave)formatter.Deserialize(fileStream);
+        using FileStream file = File.Create(savePath);
+        
+        formatter.Serialize(file, objectsToSave);
+    }
 
-        fileStream.Seek(0, SeekOrigin.Begin);
-        formatter.Serialize(fileStream, save);
-        fileStream.SetLength(fileStream.Position);
-        fileStream.Flush();
+    public List<GameObject> LoadEnvironmentObjects(World world)
+    {
+        string savePath = Path.Combine(SavePath, world.WorldFolder, "environment.dat");
+
+        if (!File.Exists(savePath))
+        {
+            return new List<GameObject>();
+        }
+            
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        using FileStream file = File.Open(savePath, FileMode.Open);
+
+        List<GameObject> objectsToLoad = (List<GameObject>)formatter.Deserialize(file);
+        
+        return objectsToLoad;
     }
 
     public static void DeleteWorld(World world)

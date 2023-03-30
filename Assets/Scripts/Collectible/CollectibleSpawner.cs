@@ -30,7 +30,10 @@ public class CollectibleSpawner : MonoBehaviour
 
     void OnMonthElapsed()
     {
-        List<Collectible> collectibles = collectibleManager.LoadCollectiblesByType(Collectible.CollectibleType.Items);
+        float randomValue = UnityEngine.Random.value;
+        Collectible.CollectibleType type = randomValue < 0.02f ? Collectible.CollectibleType.Lores : Collectible.CollectibleType.Items;
+
+        List<Collectible> collectibles = collectibleManager.LoadCollectiblesByType(type);
         if (collectibles.Count > 0 && Random.value < itemSpawnProbability)
         {
             Collectible chosenCollectible = collectibles[Random.Range(0, collectibles.Count)];

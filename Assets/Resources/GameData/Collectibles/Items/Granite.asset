@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: -2129012546, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Granite
   description: 
-  isCollected: 0
+  isCollected: 1

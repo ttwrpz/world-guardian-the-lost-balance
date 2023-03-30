@@ -5,58 +5,59 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static Collectible;
 
-public class CollectibleViewUIController : MonoBehaviour
+public class CollectibleViewUIController : UIController
 {
-    private UIDocument _doc;
-    private VisualElement _root;
+    private string _sceneName;
+    private CollectibleType _sceneNameEnum;
+
+    private Label _subtitleScreenLabel;
     private ProgressBar _collectibleProgressBar;
     private ListView _collectibleList;
     private Button _backButton;
 
-    private string _sceneName;
-    private CollectibleType _sceneNameEnum;
-
+    [SerializeField]
     private CollectibleManager _collectibleManager;
 
     [SerializeField]
     private VisualTreeAsset CollectibleListEntryTemplate;
     List<Collectible> CollectibleList;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         _sceneName = SceneManager.GetActiveScene().name;
         _sceneNameEnum = (CollectibleType)Enum.Parse(typeof(CollectibleType), _sceneName);
 
-        _collectibleManager = FindFirstObjectByType<CollectibleManager>();
-        if (_collectibleManager == null)
-        {
-            Debug.LogError("AchievementManager not found in the scene.");
-            return;
-        }
+        _collectibleManager.GetCollectedCountByType(_sceneNameEnum);
+        _collectibleManager.GetTotalCountByType(_sceneNameEnum);
 
+        base.OnEnable();
+
+        UpdateUIElements();
         EnumerateAllCollectibles();
-        GetUIElements();
-        AttachEventHandlers();
         InitializeCollectibleList();
     }
 
-    private void GetUIElements()
+    protected override void GetUIElements()
     {
-        _doc = GetComponent<UIDocument>();
-        _root = _doc.rootVisualElement;
-
+        _subtitleScreenLabel = _root.Q<Label>("SubtitleScreenLabel");
         _collectibleProgressBar = _root.Q<ProgressBar>("CollectibleProgressBar");
-        _collectibleProgressBar.title = _collectibleProgressBar.title
-            .Replace("%s1", _sceneName)
-            .Replace("%s2", CalculateProgressPercentage(_sceneNameEnum).ToString());
-        _collectibleProgressBar.value = CalculateProgressPercentage(_sceneNameEnum);
 
         _collectibleList = _root.Q<ListView>("CollectibleList");
         _backButton = _root.Q<Button>("BackButton");
 
     }
 
-    private void AttachEventHandlers()
+    private void UpdateUIElements()
+    {
+        _subtitleScreenLabel.text = _subtitleScreenLabel.text
+            .Replace("%s1", _collectibleManager.GetCollectedCountByType(_sceneNameEnum).ToString())
+            .Replace("%s2", _collectibleManager.GetTotalCountByType(_sceneNameEnum).ToString())
+            .Replace("%s3", _sceneName.ToLower());
+
+        _collectibleProgressBar.value = CalculateProgressPercentage(_sceneNameEnum);
+    }
+
+    protected override void AttachEventHandlers()
     {
         _backButton.clicked += CollectibleUIEventHandlers.onBackToCollectibleButtonClicked;
     }

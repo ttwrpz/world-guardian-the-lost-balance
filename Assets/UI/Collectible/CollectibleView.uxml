@@ -5,8 +5,8 @@
         <ui:GroupBox name="UIWrapper" class="ui-wrapper">
             <ui:GroupBox name="ScrenTitleWrapper" class="screnTitle-wrapper">
                 <ui:Label text="Collectibles" display-tooltip-when-elided="true" name="TitleScreenLabel" enable-rich-text="true" class="titleScreen" />
-                <ui:Label display-tooltip-when-elided="true" name="SubtitleScreenLabel" class="subtitleScreen" style="display: none;" />
-                <ui:ProgressBar title="Unlocked %s1 (%s2%)" name="CollectibleProgressBar" value="50" class="progress-bar" />
+                <ui:Label display-tooltip-when-elided="true" name="SubtitleScreenLabel" text="You have unlocked &lt;b&gt;%s1&lt;/b&gt; of &lt;b&gt;%s2&lt;/b&gt; %s3" class="subtitleScreen" />
+                <ui:ProgressBar name="CollectibleProgressBar" value="50" class="progress-bar" />
             </ui:GroupBox>
             <ui:ListView name="CollectibleList" virtualization-method="DynamicHeight" selection-type="None" style="flex-grow: 1;" />
             <ui:GroupBox name="ActionButtons" class="btn-row btn-actions">

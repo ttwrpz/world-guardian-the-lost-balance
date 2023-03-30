@@ -1,4 +1,5 @@
 using UnityEngine.UIElements;
+using static Collectible;
 
 public class CollectibleListEntryController
 {
@@ -19,10 +20,12 @@ public class CollectibleListEntryController
 
     public void SetData(Collectible collectible)
     {
-        _collectibleWrapper.AddToClassList((collectible.isCollected) ? "CollectibleUnlocked" : "CollectibleLocked");
+        _collectibleWrapper.AddToClassList(collectible.isCollected ? "CollectibleUnlocked" : "CollectibleLocked");
         _icon.style.backgroundImage = new StyleBackground(collectible.icon);
         _collectibleNameLabel.text = collectible.collectibleName;
-        _collectibleDescriptionLabel.text = collectible.description;
+        _collectibleDescriptionLabel.text = !collectible.isCollected && (collectible.type == CollectibleType.Endings || collectible.type == CollectibleType.Lores)
+            ? "???"
+            : collectible.description;
         _collectibleStatusLabel.text = (collectible.isCollected) ? "Collected on " + collectible.collectedDate : "Not Collected Yet";
     }
 }

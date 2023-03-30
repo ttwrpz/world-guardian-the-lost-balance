@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: -1984434157, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Earphone
   description: 
-  isCollected: 0
+  isCollected: 1

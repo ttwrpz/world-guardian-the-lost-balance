@@ -33,13 +33,13 @@ public class AchievementUIController : UIController
 
     protected override void GetUIElements()
     {
-        _achievementList = _root.Q<ListView>("achievementList");
+        _achievementList = _root.Q<ListView>("AchievementList");
 
-        _subtitleScreenLabel = _root.Q<Label>("subtitleScreenLabel");
+        _subtitleScreenLabel = _root.Q<Label>("SubtitleScreenLabel");
 
-        _achievementProgressBar = _root.Q<ProgressBar>("achievementProgressBar");
+        _achievementProgressBar = _root.Q<ProgressBar>("AchievementProgressBar");
 
-        _backButton = _root.Q<Button>("backButton");
+        _backButton = _root.Q<Button>("BackButton");
     }
 
     private void UpdateUIElements()

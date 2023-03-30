@@ -19,4 +19,5 @@ public class Collectible : ScriptableObject
     public string description;
     public bool isCollected;
     public DateTime collectedDate;
+
 }
