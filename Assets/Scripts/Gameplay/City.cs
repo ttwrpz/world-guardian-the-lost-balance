@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class City : MonoBehaviour
 {
+    public string cityName;
+
     [SerializeField] private CityState _cityState;
     [SerializeField] private bool _landmarkCity;
 
@@ -115,7 +117,7 @@ public class City : MonoBehaviour
             parameters.forest += parameters.forest * forestChange;
             parameters.crops += parameters.crops * cropsChange;
 
-            string message = $"City {gameObject.name} at {transform.position} has encountered a {disasterType}";
+            string message = $"{gameObject.name} has encountered a {disasterType}";
             OnDisasterGenerated?.Invoke(message);
         }
     }

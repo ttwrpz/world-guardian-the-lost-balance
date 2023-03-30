@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera miniMapCamera;
 
-    [SerializeField]
-    private WorldData worldData;
+    public WorldData worldData;
+    public WorldSave worldSave;
+    
     [SerializeField]
     private TerrainGenerator terrainGenerator;
+    [SerializeField]
+    private GameObject terrainMap;
 
     private List<City> cities;
 
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         terrainGenerator.heightMapSettings.noiseSettings.seed = worldData.WorldSeed;
+        //worldSave = SaveManager.LoadWorldSave(worldData.ConvertToWorld());
 
         timeManager.MonthElapsed += OnMonthElapsed;
         timeManager.YearElapsed += OnYearElapsed;
@@ -46,6 +50,16 @@ public class GameManager : MonoBehaviour
             UpdateCities();
             previousMonth = timeManager.inGameMonth;
         }
+    }
+
+    private void OnMonthElapsed()
+    {
+        skillManager.AddSkillPoints(10, worldData.WorldDifficulty);
+    }
+
+    private void OnYearElapsed()
+    {
+        // Perform actions you want to do every in-game year.
     }
 
     private void UpdateCities()
@@ -91,15 +105,5 @@ public class GameManager : MonoBehaviour
         avgParameters.crops /= cityCount;
 
         return avgParameters;
-    }
-
-    private void OnMonthElapsed()
-    {
-        skillManager.AddSkillPoints(10, worldData.WorldDifficulty);
-    }
-
-    private void OnYearElapsed()
-    {
-        // Perform actions you want to do every in-game year.
     }
 }

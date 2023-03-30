@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: mouse_trap
   type: 1
-  icon: {fileID: 0}
+  icon: {fileID: 1461565544, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Mouse Trap
   description: 
   isCollected: 0

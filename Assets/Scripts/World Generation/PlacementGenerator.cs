@@ -60,8 +60,6 @@ public class PlacementGenerator : MonoBehaviour
                 float minHeight = currentSettingList.minHeight;
                 float maxHeight = currentSettingList.maxHeight;
 
-                Debug.Log(string.Format("CurrentIndex: {0} | Density: {1} | CurrentLoopI: {2} | MinHeight: {3} | MaxHeight: {4}", prefab.name, currentSettingList.density, i, minHeight, maxHeight));
-
                 float sampleX = Random.Range(xRange.x, xRange.y);
                 float sampleY = Random.Range(zRange.x, zRange.y);
                 Vector3 rayStart = new(sampleX, maxHeight, sampleY);

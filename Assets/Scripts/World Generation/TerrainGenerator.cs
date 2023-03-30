@@ -24,6 +24,8 @@ public class TerrainGenerator : MonoBehaviour
     Dictionary<Vector2, TerrainChunk> terrianChunkDictionary = new();
     List<TerrainChunk> visibleTerrainChunks = new();
 
+    public event System.Action<TerrainChunk, bool> OnVisibilityChanged;
+
     private void Start()
     {
         textureSettings.ApplyToMaterial(terrainMaterial);
@@ -69,7 +71,6 @@ public class TerrainGenerator : MonoBehaviour
 
         if (heightMapSettings.useFixedSizeMap)
         {
-            // Loop over all possible chunk coordinates in the fixed size map
             for (int z = 0; z < heightMapSettings.mapSizeZ; z++)
             {
                 for (int x = 0; x < heightMapSettings.mapSizeX; x++)
@@ -161,6 +162,7 @@ public class TerrainGenerator : MonoBehaviour
             visibleTerrainChunks.Remove(chunk);
         }
     }
+
 }
 
 [System.Serializable]

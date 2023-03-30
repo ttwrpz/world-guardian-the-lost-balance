@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Slate
   type: 1
-  icon: {fileID: 0}
+  icon: {fileID: 1672055045, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Slate
   description: 
   isCollected: 0

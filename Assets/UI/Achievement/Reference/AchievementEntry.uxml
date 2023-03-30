@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Achievement/Reference/AchievementEntry.uss?fileID=7433441132597879392&amp;guid=e4d38e8bba694054996a182877cb121e&amp;type=3#AchievementEntry" />
+    <ui:GroupBox name="AchievementWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; align-items: stretch; -unity-font-definition: url(&apos;project://database/Assets/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&amp;guid=2fc062e308e3b914cbdf2e8e954886c4&amp;type=3#RD CHULAJARUEK&apos;); color: rgb(229, 229, 229);">
+        <ui:GroupBox style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-grow: 1; flex-direction: row; flex-shrink: 1;">
+            <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Art%20Assets/frame.png?fileID=2800000&amp;guid=51198e45c1564bc4ca39d05cd7064c29&amp;type=3#frame&apos;); width: 64px; height: 64px; margin-right: 10px; display: none;">
+                <ui:VisualElement name="Icon" style="background-image: url(&apos;project://database/Assets/Art%20Assets/question.png?fileID=21300000&amp;guid=f9d513c8a97b08d4ab0b1684e2d64541&amp;type=3#question&apos;); width: 48px; height: 48px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: center; align-items: center; justify-content: center; margin-top: auto; margin-bottom: auto; -unity-slice-left: 3; -unity-slice-top: 3; -unity-slice-right: 3; -unity-slice-bottom: 3;" />
+            </ui:VisualElement>
+            <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-grow: 1; justify-content: center; flex-shrink: 1; overflow: hidden;">
+                <ui:Label tabindex="-1" text="Achievement Name" display-tooltip-when-elided="true" name="AchievementNameLabel" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-right: 0; padding-left: 0; border-bottom-width: 1px; -unity-font-style: bold; padding-top: 0; padding-bottom: 0; text-overflow: ellipsis; white-space: normal;" />
+                <ui:Label tabindex="-1" text="Achievement Description" display-tooltip-when-elided="true" name="AchievementDescriptionLabel" class="label" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; white-space: normal; text-overflow: ellipsis;" />
+            </ui:GroupBox>
+            <ui:GroupBox style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: center;">
+                <ui:Label tabindex="-1" text="Not Unlocked Yet" display-tooltip-when-elided="true" name="AchievementStatusLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:VisualElement name="VisualElement" />
+    </ui:GroupBox>
+</ui:UXML>
