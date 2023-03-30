@@ -88,60 +88,99 @@ public class TerrainChunk
         }
     }
 
+    public float GetHeightAtNormalizedPosition(Vector2 normalizedPosition)
+    {
+        if (!heightMapReceived)
+            return 0;
+
+        int x = Mathf.Clamp(Mathf.FloorToInt(normalizedPosition.x * meshSettings.numberVerticlesPerLine), 0, meshSettings.numberVerticlesPerLine - 1);
+        int z = Mathf.Clamp(Mathf.FloorToInt(normalizedPosition.y * meshSettings.numberVerticlesPerLine), 0, meshSettings.numberVerticlesPerLine - 1);
+
+        return heightMap.values[x, z] * heightMapSettings.heightMultiplier;
+    }
+
+    public MeshSettings GetMeshSettings()
+    {
+        return meshSettings;
+    }
+
+    public void SetMeshSettings(MeshSettings newMeshSettings)
+    {
+        meshSettings = newMeshSettings;
+    }
+
+    public GameObject GetMeshObject()
+    {
+        return meshObject;
+    }
+
+    public void SetMeshObject(GameObject newMeshObject)
+    {
+        meshObject = newMeshObject;
+    }
+
     public void UpdateTerrainChunk()
     {
         if (!heightMapReceived)
             return;
-
-        float viewerDstFromNearestEdge = Mathf.Sqrt(bounds.SqrDistance(viewerPosition));
         
         bool wasVisible = IsVisible();
-        bool visible = viewerDstFromNearestEdge <= maxViewDst;
+        bool visible = true;
 
-        if (visible)
+        if (!heightMapSettings.useFixedSizeMap)
         {
-            int lodIndex = 0;
+            float viewerDstFromNearestEdge = Mathf.Sqrt(bounds.SqrDistance(viewerPosition));
+            visible = viewerDstFromNearestEdge <= maxViewDst;
 
-            for (int i = 1; i < detailLevels.Length; i++)
+            if (visible)
             {
-                if (viewerDstFromNearestEdge > detailLevels[i].visibleDstThreshold)
+                int lodIndex = 0;
+
+                for (int i = 1; i < detailLevels.Length; i++)
                 {
-                    lodIndex = i + 1;
+                    if (viewerDstFromNearestEdge > detailLevels[i].visibleDstThreshold)
+                    {
+                        lodIndex = i + 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
+
+                if (lodIndex != previousLODIndex)
                 {
-                    break;
+                    LODMesh lodMesh = lodMeshes[lodIndex];
+
+                    if (lodMesh.hasMesh)
+                    {
+                        previousLODIndex = lodIndex;
+                        meshFilter.mesh = lodMesh.mesh;
+                    }
+                    else if (!lodMesh.hasRequestedMesh)
+                    {
+                        lodMesh.RequestMesh(heightMap, meshSettings);
+                    }
                 }
             }
-
-            if (lodIndex != previousLODIndex)
+        }
+        else
+        {
+            if (!lodMeshes[0].hasMesh)
             {
-                LODMesh lodMesh = lodMeshes[lodIndex];
+                lodMeshes[0].RequestMesh(heightMap, meshSettings);
+            }
 
-                if (lodMesh.hasMesh)
-                {
-                    previousLODIndex = lodIndex;
-                    meshFilter.mesh = lodMesh.mesh;
-                }
-                else if (!lodMesh.hasRequestedMesh)
-                {
-                    lodMesh.RequestMesh(heightMap, meshSettings);
-                }
-
+            if (lodMeshes[0].hasMesh)
+            {
+                meshFilter.mesh = lodMeshes[0].mesh;
             }
         }
 
         if (IsVisible() != visible)
         {
-            if (heightMapSettings.useFixedSizeMap)
-            {
-                SetVisible(true);
-            }
-            else
-            {
-                SetVisible(visible);
-            }
-            
+            SetVisible(visible);
+
             if (onVisibilityChanged != null)
             {
                 onVisibilityChanged?.Invoke(this, visible);

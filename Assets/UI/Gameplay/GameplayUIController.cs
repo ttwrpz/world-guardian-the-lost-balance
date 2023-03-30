@@ -12,6 +12,8 @@ public class GameplayUIController : UIController
     [SerializeField]
     private SkillManager skillManager;
 
+    private GroupBox UIWrapper;
+
     private GroupBox _statusGroup;
     private Label statusTitleLabel;
     private GroupBox _parameterBox;
@@ -30,6 +32,12 @@ public class GameplayUIController : UIController
     private Button collectibleButton;
     private Button settingsButton;
 
+    [SerializeField]
+    private VisualTreeAsset pauseMenu;
+    private VisualElement pauseMenuElement;
+    private Button pauseMenuResume;
+    private Button pauseMenuBackToMainMenu;
+
     private GroupBox _controlGroup;
     private GroupBox _timeControlBox;
     private Label dateTimeLabel;
@@ -41,11 +49,10 @@ public class GameplayUIController : UIController
     private GroupBox _mapBox;
     private VisualElement map;
 
-    [SerializeField]
-    private VisualTreeAsset _skillInfoTemplate;
     private GroupBox _gameplayGroup;
     private GroupBox _newsBox;
     private Label newsLabel;
+    private string newsLabelDefaultText;
     private GroupBox _skillsBox;
     private ProgressBar skillPointBar;
     private ScrollView skillCardSrollView;
@@ -60,6 +67,11 @@ public class GameplayUIController : UIController
     private List<Skill> SkillCardList;
     private List<SkillCard> skillCards;
     private SkillCard activeSkillCard;
+
+    private void Start()
+    {
+        ChangeTimeState(TimeState.Resume);
+    }
 
     protected override void OnEnable()
     {
@@ -83,6 +95,7 @@ public class GameplayUIController : UIController
 
     private void OnMonthElapsed()
     {
+        UpdateNewsLabel(newsLabelDefaultText);
         parameters = gameManager.CalculateAverageCityParameters();
         UpdateUIElements();
     }
@@ -115,8 +128,8 @@ public class GameplayUIController : UIController
 
     protected override void GetUIElements()
     {
-        _doc = GetComponent<UIDocument>();
-        _root = _doc.rootVisualElement;
+
+        UIWrapper = _root.Q<GroupBox>("UIWrapper");
 
         /****************
         *
@@ -146,6 +159,13 @@ public class GameplayUIController : UIController
         collectibleButton = _menuGroup.Q<Button>("CollectibleButton");
         settingsButton = _menuGroup.Q<Button>("SettingsButton");
 
+        pauseMenuElement = pauseMenu.CloneTree();
+        pauseMenuElement.style.display = DisplayStyle.None;
+        _root.Add(pauseMenuElement);
+
+        pauseMenuResume = pauseMenuElement.Q<Button>("ResumeButton");
+        pauseMenuBackToMainMenu = pauseMenuElement.Q<Button>("BackToMainMenuButton");
+
         /*********************
         *
         *  Gameplay Control
@@ -171,7 +191,8 @@ public class GameplayUIController : UIController
 
         _gameplayGroup = _root.Q<GroupBox>("Gameplay");
         _newsBox = _gameplayGroup.Q<GroupBox>("News");
-        newsLabel = _newsBox.Q<Label>("NewsLabel"); ;
+        newsLabel = _newsBox.Q<Label>("NewsLabel");
+        newsLabelDefaultText = newsLabel.text;
         _skillsBox = _gameplayGroup.Q<GroupBox>("SkillsBox");
         skillPointBar = _skillsBox.Q<ProgressBar>("SkillPoint");
         skillCardSrollView = _skillsBox.Q<ScrollView>("SkillCards");
@@ -185,10 +206,64 @@ public class GameplayUIController : UIController
 
     protected override void AttachEventHandlers()
     {
-        timePauseButton.RegisterCallback<ClickEvent>(evt => timeManager.PauseTime());
-        timeResumeButton.RegisterCallback<ClickEvent>(evt => timeManager.ResumeTime());
-        timeSpeedUp2xButton.RegisterCallback<ClickEvent>(evt => timeManager.SpeedUp2x());
-        timeSpeedUp3xButton.RegisterCallback<ClickEvent>(evt => timeManager.SpeedUp3x());
+        settingsButton.RegisterCallback<ClickEvent>(evt => ShowPauseMenu());
+        pauseMenuResume.RegisterCallback<ClickEvent>(evt => HidePauseMenu());
+        pauseMenuBackToMainMenu.RegisterCallback<ClickEvent>(evt =>
+        {
+            SaveManager.SaveWorldData(gameManager.worldData.ConvertToWorld());
+            SaveManager.SaveWorld(gameManager.worldData.ConvertToWorld(), gameManager.worldSave);
+            UIManager.BackToMainMenuUI();
+        });
+
+        timePauseButton.RegisterCallback<ClickEvent>(evt => ChangeTimeState(TimeState.Pause));
+        timeResumeButton.RegisterCallback<ClickEvent>(evt => ChangeTimeState(TimeState.Resume));
+        timeSpeedUp2xButton.RegisterCallback<ClickEvent>(evt => ChangeTimeState(TimeState.SpeedUp2x));
+        timeSpeedUp3xButton.RegisterCallback<ClickEvent>(evt => ChangeTimeState(TimeState.SpeedUp3x));
+    }
+
+    private void HidePauseMenu()
+    {
+        ChangeTimeState(TimeState.Resume);
+        UIWrapper.SetEnabled(true);
+        pauseMenuElement.style.display = DisplayStyle.None;
+    }
+
+    private void ShowPauseMenu()
+    {
+        ChangeTimeState(TimeState.Pause);
+        UIWrapper.SetEnabled(false);
+        pauseMenuElement.style.display = DisplayStyle.Flex;
+
+        SaveManager.SaveWorldData(gameManager.worldData.ConvertToWorld());
+        SaveManager.SaveWorld(gameManager.worldData.ConvertToWorld(), gameManager.worldSave);
+    }
+
+    private void ChangeTimeState(TimeState state)
+    {
+        timePauseButton.RemoveFromClassList("btn-active");
+        timeResumeButton.RemoveFromClassList("btn-active");
+        timeSpeedUp2xButton.RemoveFromClassList("btn-active");
+        timeSpeedUp3xButton.RemoveFromClassList("btn-active");
+
+        switch (state)
+        {
+            case TimeState.Pause:
+                timeManager.PauseTime();
+                timePauseButton.AddToClassList("btn-active");
+                break;
+            case TimeState.Resume:
+                timeManager.ResumeTime();
+                timeResumeButton.AddToClassList("btn-active");
+                break;
+            case TimeState.SpeedUp2x:
+                timeManager.SpeedUp2x();
+                timeSpeedUp2xButton.AddToClassList("btn-active");
+                break;
+            case TimeState.SpeedUp3x:
+                timeManager.SpeedUp3x();
+                timeSpeedUp3xButton.AddToClassList("btn-active");
+                break;
+        }
     }
 
     private void UpdateSkillPointsLabel()
@@ -213,7 +288,7 @@ public class GameplayUIController : UIController
 
         skillTooltipNameLabel.text = hoveredCard.skill.skillName;
         skillTooltipDescriptionLabel.text = hoveredCard.skill.description;
-        skillTooltipPointCostLabel.text = hoveredCard.skill.skillPointCost.ToString();
+        skillTooltipPointCostLabel.text = $"{hoveredCard.skill.skillPointCost} Skill Points";
         _skillTooltipBox.style.display = DisplayStyle.Flex;
     }
 

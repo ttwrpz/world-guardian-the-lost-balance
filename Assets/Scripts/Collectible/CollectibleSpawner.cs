@@ -1,46 +1,87 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CollectibleSpawner : MonoBehaviour
 {
-    public List<Transform> spawnPoints;
-    public Collectible.CollectibleType collectibleType;
+    [SerializeField]
+    private GameManager gameManager;
+    private TimeManager timeManager;
 
-    CollectibleManager collectibleManager;
+    public CollectibleManager collectibleManager;
 
-    private void Start()
+    public GameObject collectibleSpritePrefab;
+    public float itemSpawnProbability = 0.2f;
+    public float collectibleRotationSpeed = 10.0f;
+
+    private void Awake()
     {
-        collectibleManager = FindFirstObjectByType<CollectibleManager>();
-        if (collectibleManager == null)
-        {
-            Debug.LogError("AchievementManager not found in the scene.");
-            return;
-        }
-
-        SpawnCollectibles();
+        timeManager = gameManager.GetComponent<TimeManager>();
     }
 
-    private void SpawnCollectibles()
+    void Start()
     {
-        List<Collectible> collectibles = collectibleManager.LoadCollectiblesByType(collectibleType);
+        timeManager.MonthElapsed += OnMonthElapsed;
+    }
 
-        foreach (Collectible collectible in collectibles)
+    void OnDestroy()
+    {
+        timeManager.MonthElapsed -= OnMonthElapsed;
+    }
+
+    void OnMonthElapsed()
+    {
+        List<Collectible> collectibles = collectibleManager.LoadCollectiblesByType(Collectible.CollectibleType.Items);
+        if (collectibles.Count > 0 && Random.value < itemSpawnProbability)
         {
-            if (!collectibleManager.IsCollectibleUnlocked(collectible.id))
+            Collectible chosenCollectible = collectibles[Random.Range(0, collectibles.Count)];
+            Vector3 spawnPosition = GetRandomTerrainPosition();
+            GameObject collectibleSprite = Instantiate(collectibleSpritePrefab, spawnPosition, Quaternion.identity);
+
+            if (chosenCollectible.icon)
             {
-                Transform spawnPoint = GetRandomSpawnPoint();
-                GameObject collectiblePrefab = Resources.Load<GameObject>($"Prefabs/Collectibles/{collectible.id}");
-                GameObject spawnedCollectible = Instantiate(collectiblePrefab, spawnPoint.position, spawnPoint.rotation);
-                spawnedCollectible.GetComponent<CollectibleController>().collectible = collectible;
+                collectibleSprite.GetComponent<SpriteRenderer>().sprite = chosenCollectible.icon;
+            }
+            collectibleSprite.GetComponent<CollectibleCollectHandler>().collectibleId = chosenCollectible.id;
+            collectibleSprite.AddComponent<CollectibleRotate>().rotationSpeed = collectibleRotationSpeed;
+            collectibleSprite.transform.parent = collectibleManager.transform;
+        }
+    }
+
+    Vector3 GetRandomTerrainPosition()
+    {
+        MeshFilter[] meshFilters = FindObjectsByType<MeshFilter>(FindObjectsSortMode.None);
+        List<MeshFilter> terrainMeshFilters = new List<MeshFilter>();
+
+        foreach (MeshFilter meshFilter in meshFilters)
+        {
+            if (meshFilter.GetComponent<MeshCollider>() != null)
+            {
+                terrainMeshFilters.Add(meshFilter);
             }
         }
-    }
 
-    private Transform GetRandomSpawnPoint()
+        MeshFilter randomMeshFilter = terrainMeshFilters[Random.Range(0, terrainMeshFilters.Count)];
+
+        Vector3 randomPoint = randomMeshFilter.mesh.vertices[Random.Range(0, randomMeshFilter.mesh.vertices.Length)];
+        randomPoint = randomMeshFilter.transform.TransformPoint(randomPoint);
+
+        float distanceAboveTerrain = 5f;
+        float terrainHeight = randomMeshFilter.transform.position.y;
+        if (randomPoint.y < terrainHeight + distanceAboveTerrain)
+        {
+            randomPoint.y = terrainHeight + distanceAboveTerrain;
+        }
+
+        return randomPoint;
+    }
+}
+
+public class CollectibleRotate : MonoBehaviour
+{
+    public float rotationSpeed = 10.0f;
+
+    void Update()
     {
-        int index = Random.Range(0, spawnPoints.Count);
-        Transform spawnPoint = spawnPoints[index];
-        spawnPoints.RemoveAt(index);
-        return spawnPoint;
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 }

@@ -9,10 +9,12 @@ public class TimeManager : MonoBehaviour
     public float realTimeToYear = 10 * 60; // 10 minutes in seconds
     public float timeScale = 1.0f;
 
-    private float elapsedTime = 0;
+    public float elapsedTime = 0;
 
     public event Action MonthElapsed;
     public event Action YearElapsed;
+
+    public TimeState timeState;
 
     void Update()
     {
@@ -22,21 +24,25 @@ public class TimeManager : MonoBehaviour
     public void PauseTime()
     {
         timeScale = 0;
+        timeState = TimeState.Pause;
     }
 
     public void ResumeTime()
     {
         timeScale = 1;
+        timeState = TimeState.Resume;
     }
 
     public void SpeedUp2x()
     {
         timeScale = 2;
+        timeState = TimeState.SpeedUp2x;
     }
 
     public void SpeedUp3x()
     {
         timeScale = 3;
+        timeState = TimeState.SpeedUp3x;
     }
 
     public void AdvanceTime(float delta)
@@ -62,4 +68,11 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+}
+
+public enum TimeState {
+    Pause,
+    Resume,
+    SpeedUp2x,
+    SpeedUp3x
 }

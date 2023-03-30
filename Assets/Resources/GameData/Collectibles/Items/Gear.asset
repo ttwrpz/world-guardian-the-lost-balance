@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: gear
   type: 1
-  icon: {fileID: 0}
+  icon: {fileID: -868424123, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Gear
   description: 
   isCollected: 0

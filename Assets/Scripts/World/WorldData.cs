@@ -12,6 +12,20 @@ public class WorldData : ScriptableObject
         WorldFolder = world.WorldFolder;
     }
 
+    public World ConvertToWorld()
+    {
+        World world = new()
+        {
+            WorldName = WorldName,
+            WorldSeed = WorldSeed,
+            WorldGameMode = WorldGameMode,
+            WorldDifficulty = WorldDifficulty,
+            WorldFolder = WorldFolder
+        };
+
+        return world;
+    }
+
     public void ClearData()
     {
         WorldName = "";

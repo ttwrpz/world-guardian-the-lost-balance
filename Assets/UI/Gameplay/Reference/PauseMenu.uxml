@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/core.uss?fileID=7433441132597879392&amp;guid=1d5bb3eafde9dc249b4bb30cba3f3bde&amp;type=3#core" />
+    <ui:VisualElement name="Background" class="screen-bg" style="background-image: none; background-color: rgba(68, 77, 77, 0.5);">
+        <ui:GroupBox name="UIWrapper" class="ui-wrapper" style="justify-content: center;">
+            <ui:GroupBox name="screnTitleWrapper" class="screnTitle-wrapper">
+                <ui:Label text="Game Paused" display-tooltip-when-elided="true" name="titleScreenLabel" enable-rich-text="true" class="titleScreen" />
+                <ui:Label text="Your game was saved safely" display-tooltip-when-elided="true" name="subtitleScreenLabel" class="subtitleScreen" />
+            </ui:GroupBox>
+            <ui:GroupBox name="ActionButtons" class="btn-actions" style="padding-right: 3px;">
+                <ui:Button text="Resume" display-tooltip-when-elided="true" name="ResumeButton" class="btn btn-lg" />
+                <ui:Button text="Back to Main Menu" display-tooltip-when-elided="true" name="BackToMainMenuButton" class="btn btn-lg" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

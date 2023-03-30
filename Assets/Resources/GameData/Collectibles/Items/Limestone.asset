@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: limestone
   type: 1
-  icon: {fileID: 0}
+  icon: {fileID: -1227951369, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Limestone
   description: 
   isCollected: 0

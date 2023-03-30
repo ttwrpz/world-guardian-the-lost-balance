@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: emerald
   type: 1
-  icon: {fileID: 0}
+  icon: {fileID: -807080710, guid: e8eb136a1f7c2984280e2ee3c35d7aec, type: 3}
   collectibleName: Emerald
   description: 
   isCollected: 0

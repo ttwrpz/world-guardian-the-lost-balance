@@ -114,13 +114,13 @@ Material:
     - _Depth: 0.2
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Displacement: 0.2
+    - _Displacement: 4
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Foam_Amount: 0.93
+    - _Foam_Amount: 8.09
     - _Foam_Color: 0
-    - _Foam_Cutoff: 2.2
+    - _Foam_Cutoff: 3.42
     - _Foam_Scale: 100
     - _Foam_Speed: 0.34
     - _GlossMapScale: 0
@@ -128,7 +128,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NormalStrength: 0
-    - _Normal_Strength: 0.033
+    - _Normal_Strength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0

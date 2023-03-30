@@ -85,7 +85,7 @@ MonoBehaviour:
   useFixedSizeMap: 1
   mapSizeX: 4
   mapSizeZ: 4
-  useFalloff: 1
+  useFalloff: 0
   falloffType: 1
   falloffA: 3
   falloffB: 2.2

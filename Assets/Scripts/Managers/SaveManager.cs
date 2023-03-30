@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.IO.Pipes;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -111,6 +114,43 @@ public class SaveManager
 
         fileStream.Seek(0, SeekOrigin.Begin);
         formatter.Serialize(fileStream, worldNewData);
+        fileStream.SetLength(fileStream.Position);
+        fileStream.Flush();
+    }
+
+    private static void CreateWorldSave(World world, WorldSave worldSave)
+    {
+        BinaryFormatter formatter = new();
+        using FileStream fileStream = new(Path.Combine(world.WorldFolder, "save.dat"), FileMode.Create);
+        formatter.Serialize(fileStream, worldSave);
+    }
+
+    public static WorldSave LoadWorldSave(World world)
+    {
+        string _saveFile = Path.Combine(SavePath, world.WorldFolder, "save.dat");
+
+        BinaryFormatter formatter = new();
+        using FileStream fileStream = new(_saveFile, FileMode.Open);
+
+        return (WorldSave)formatter.Deserialize(fileStream);
+    }
+
+    public static void SaveWorld(World world, WorldSave worldSave)
+    {
+        string _saveFile = Path.Combine(SavePath, world.WorldFolder, "save.dat");
+
+        if (!File.Exists(_saveFile))
+        {
+            CreateWorldSave(world, worldSave);
+        }
+
+        BinaryFormatter formatter = new();
+        using FileStream fileStream = new(_saveFile, FileMode.Open);
+
+        WorldSave save = (WorldSave)formatter.Deserialize(fileStream);
+
+        fileStream.Seek(0, SeekOrigin.Begin);
+        formatter.Serialize(fileStream, save);
         fileStream.SetLength(fileStream.Position);
         fileStream.Flush();
     }

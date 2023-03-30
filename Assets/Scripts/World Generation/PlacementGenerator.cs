@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlacementGenerator : MonoBehaviour
@@ -22,7 +21,6 @@ public class PlacementGenerator : MonoBehaviour
     [SerializeField] Vector3 minScale;
     [SerializeField] Vector3 maxScale;
 
-#if UNITY_EDITOR
     public void Generate()
     {
         Clear();
@@ -42,7 +40,7 @@ public class PlacementGenerator : MonoBehaviour
             if (hit.point.y < minHeight)
                 continue;
 
-            GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(prefab, transform);
+            GameObject instantiatedPrefab = Instantiate(prefab, transform);
 
             instantiatedPrefab.transform.SetParent(transform);
             instantiatedPrefab.transform.position = hit.point;
@@ -64,5 +62,4 @@ public class PlacementGenerator : MonoBehaviour
         }
     }
 
-#endif
 }

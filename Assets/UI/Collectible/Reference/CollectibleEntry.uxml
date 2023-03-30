@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Collectible/Reference/CollectibleEntry.uss?fileID=7433441132597879392&amp;guid=cc15cc2f7ee8d72469cfe1af0edf8905&amp;type=3#CollectibleEntry" />
+    <ui:GroupBox name="CollectibleWrapper" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: row; align-items: stretch; -unity-font-definition: url(&apos;project://database/Assets/Fonts/RD%20CHULAJARUEK.ttf?fileID=12800000&amp;guid=2fc062e308e3b914cbdf2e8e954886c4&amp;type=3#RD CHULAJARUEK&apos;); color: rgb(229, 229, 229);">
+        <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-grow: 1; flex-direction: row; flex-shrink: 1;">
+            <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Art%20Assets/frame.png?fileID=2800000&amp;guid=51198e45c1564bc4ca39d05cd7064c29&amp;type=3#frame&apos;); width: 64px; height: 64px; margin-right: 10px; display: none;">
+                <ui:VisualElement name="Icon" style="width: 48px; height: 48px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: center; align-items: center; justify-content: center; margin-top: auto; margin-bottom: auto; -unity-slice-left: 3; -unity-slice-top: 3; -unity-slice-right: 3; -unity-slice-bottom: 3; background-image: url(&apos;project://database/Assets/Art%20Assets/question.png?fileID=21300000&amp;guid=f9d513c8a97b08d4ab0b1684e2d64541&amp;type=3#question&apos;);" />
+            </ui:VisualElement>
+            <ui:GroupBox name="GroupBox" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; justify-content: center; overflow: hidden; flex-shrink: 1; flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Collectible Name" display-tooltip-when-elided="true" name="CollectibleNameLabel" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-right: 0; padding-left: 0; border-bottom-width: 1px; -unity-font-style: bold; padding-top: 0; padding-bottom: 0; white-space: normal; text-overflow: ellipsis;" />
+                <ui:Label tabindex="-1" text="Collectible Description" display-tooltip-when-elided="true" name="CollectibeDescriptionLabel" class="label" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; white-space: normal; text-overflow: ellipsis;" />
+            </ui:GroupBox>
+            <ui:GroupBox style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: center;">
+                <ui:Label tabindex="-1" text="Not Unlocked Yet" display-tooltip-when-elided="true" name="CollectibleStatusLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:VisualElement name="VisualElement" />
+    </ui:GroupBox>
+</ui:UXML>
